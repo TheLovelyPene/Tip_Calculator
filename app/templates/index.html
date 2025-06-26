@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Ease - Advanced Tip Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .form-container {
+            padding: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+        
+        .people-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .people-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .person-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .person-card h4 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+        
+        .person-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            align-items: end;
+        }
+        
+        .birthday-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .birthday-toggle input[type="checkbox"] {
+            width: auto;
+            transform: scale(1.2);
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            margin-bottom: 15px;
+        }
+        
+        .results {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        
+        .summary-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .summary-card h3 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .summary-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .summary-item .label {
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .summary-item .value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        
+        .individual-breakdown {
+            margin-top: 25px;
+        }
+        
+        .person-result {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .person-result.birthday {
+            background: linear-gradient(135deg, #FFD700, #FFC107);
+            color: #333;
+        }
+        
+        .person-result h4 {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .payment-method-badge {
+            background: #2196F3;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+        }
+        
+        .payment-method-badge.cash {
+            background: #4CAF50;
+        }
+        
+        .person-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+        
+        .breakdown-item {
+            text-align: center;
+            padding: 10px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 6px;
+        }
+        
+        .breakdown-item .label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .breakdown-item .value {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .birthday-message {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .person-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .person-breakdown {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧾 Tip Ease</h1>
+            <p>Advanced Tip Calculator with Split & Payment Tracking</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="tipForm">
+                <div class="form-group">
+                    <label for="billAmount">Bill Amount ($)</label>
+                    <input type="number" id="billAmount" step="0.01" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tipPercentage">Tip Percentage (%)</label>
+                    <input type="number" id="tipPercentage" value="15" min="0" max="100" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="numPeople">Number of People</label>
+                    <input type="number" id="numPeople" value="1" min="1" max="20" required>
+                </div>
+                
+                <button type="button" class="btn btn-secondary" onclick="generatePeopleFields()">
+                    👥 Set Up People Details
+                </button>
+                
+                <div id="peopleSection" class="people-section" style="display: none;">
+                    <h3>👥 People Details</h3>
+                    <div id="peopleContainer"></div>
+                </div>
+                
+                <button type="submit" class="btn">💰 Calculate Tips</button>
+            </form>
+            
+            <div id="results" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        function generatePeopleFields() {
+            const numPeople = parseInt(document.getElementById('numPeople').value);
+            const peopleContainer = document.getElementById('peopleContainer');
+            const peopleSection = document.getElementById('peopleSection');
+            
+            if (numPeople < 1 || numPeople > 20) {
+                alert('Please enter a number between 1 and 20');
+                return;
+            }
+            
+            peopleContainer.innerHTML = '';
+            
+            for (let i = 1; i <= numPeople; i++) {
+                const personCard = document.createElement('div');
+                personCard.className = 'person-card';
+                personCard.innerHTML = `
+                    <h4>Person ${i}</h4>
+                    <div class="person-form">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" id="name_${i}" placeholder="Enter name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Payment Method</label>
+                            <select id="payment_${i}" required>
+                                <option value="card">💳 Card</option>
+                                <option value="cash">💵 Cash</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="birthday-toggle">
+                                <input type="checkbox" id="birthday_${i}">
+                                🎂 It's their birthday!
+                            </label>
+                        </div>
+                    </div>
+                `;
+                peopleContainer.appendChild(personCard);
+            }
+            
+            peopleSection.style.display = 'block';
+        }
+        
+        document.getElementById('tipForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const billAmount = parseFloat(document.getElementById('billAmount').value);
+            const tipPercentage = parseFloat(document.getElementById('tipPercentage').value);
+            const numPeople = parseInt(document.getElementById('numPeople').value);
+            
+            // Collect people data
+            const people = [];
+            for (let i = 1; i <= numPeople; i++) {
+                const nameEl = document.getElementById(`name_${i}`);
+                const paymentEl = document.getElementById(`payment_${i}`);
+                const birthdayEl = document.getElementById(`birthday_${i}`);
+                
+                if (!nameEl || !paymentEl || !birthdayEl) {
+                    alert('Please set up people details first!');
+                    return;
+                }
+                
+                people.push({
+                    name: nameEl.value.trim() || `Person ${i}`,
+                    payment_method: paymentEl.value,
+                    is_birthday: birthdayEl.checked
+                });
+            }
+            
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="loading">Calculating... 🧮</div>';
+            resultsDiv.style.display = 'block';
+            
+            try {
+                const response = await fetch('/calculate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        bill_amount: billAmount,
+                        tip_percentage: tipPercentage,
+                        num_people: numPeople,
+                        people: people
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Something went wrong');
+                }
+                
+                displayResults(data);
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        });
+        
+        function displayResults(data) {
+            const { summary, individual_breakdowns } = data;
+            const resultsDiv = document.getElementById('results');
+            
+            let html = `
+                <div class="results">
+                    <div class="summary-card">
+                        <h3>📊 Bill Summary</h3>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="label">Original Bill</div>
+                                <div class="value">$${summary.bill_amount.toFixed(2)}</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="label">Tip (${summary.tip_percentage}%)</div>
+                                <div class="value">$${summary.tip_amount.toFixed(2)}</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="label">Total Amount</div>
+                                <div class="value">$${summary.total_amount.toFixed(2)}</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="label">People Paying</div>
+                                <div class="value">${summary.num_paying}/${summary.num_people}</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="label">Per Person</div>
+                                <div class="value">$${summary.total_per_person.toFixed(2)}</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="label">💳 Card Total</div>
+                                <div class="value">$${summary.card_total.toFixed(2)}</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="label">💵 Cash Total</div>
+                                <div class="value">$${summary.cash_total.toFixed(2)}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="individual-breakdown">
+                        <h3 style="text-align: center; margin-bottom: 20px; color: #4CAF50;">👥 Individual Breakdown</h3>
+            `;
+            
+            individual_breakdowns.forEach(person => {
+                html += `
+                    <div class="person-result ${person.is_birthday ? 'birthday' : ''}">
+                        <h4>
+                            ${person.name}
+                            <span class="payment-method-badge ${person.payment_method}">
+                                ${person.payment_method === 'cash' ? '💵' : '💳'} ${person.payment_method.toUpperCase()}
+                            </span>
+                        </h4>
+                `;
+                
+                if (person.is_birthday) {
+                    html += `<div class="birthday-message">${person.birthday_message}</div>`;
+                } else {
+                    html += `
+                        <div class="person-breakdown">
+                            <div class="breakdown-item">
+                                <div class="label">Bill Share</div>
+                                <div class="value">$${person.bill_amount.toFixed(2)}</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="label">Tip Share</div>
+                                <div class="value">$${person.tip_amount.toFixed(2)}</div>
+                            </div>
+                            <div class="breakdown-item">
+                                <div class="label">Total to Pay</div>
+                                <div class="value">$${person.total_amount.toFixed(2)}</div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                html += '</div>';
+            });
+            
+            html += '</div></div>';
+            
+            resultsDiv.innerHTML = html;
+        }
+        
+        // Initialize with default people fields
+        document.addEventListener('DOMContentLoaded', function() {
+            generatePeopleFields();
+        });
+    </script>
+</body>
+</html>
