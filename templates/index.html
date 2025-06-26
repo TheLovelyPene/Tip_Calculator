@@ -1,0 +1,109 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TipEase: Flask Tip Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 600px; margin: auto; }
+        label, input, select { display: block; margin: 10px 0; }
+        button { margin-top: 15px; }
+        .result { margin-top: 20px; font-weight: bold; }
+        .person-block { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+    </style>
+    <script>
+        function updatePeopleFields() {
+            const numPeople = parseInt(document.getElementById('num_people').value) || 1;
+            const peopleDiv = document.getElementById('people_fields');
+            peopleDiv.innerHTML = '';
+            for (let i = 0; i < numPeople; i++) {
+                peopleDiv.innerHTML += `
+                <div class="person-block">
+                    <label>Name for Person ${i+1}: <input type="text" name="name" required></label>
+                    <label>Payment Method:
+                        <select name="payment_method" required>
+                            <option value="cash">Cash</option>
+                            <option value="card">Card</option>
+                        </select>
+                    </label>
+                    <span class="birthday-toggle" style="display:none">
+                        <label>Is it their birthday? 
+                            <select name="is_birthday">
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </label>
+                    </span>
+                </div>
+                `;
+            }
+            updateBirthdayToggles();
+        }
+        function updateBirthdayToggles() {
+            const anyBirthday = document.querySelector('input[name="any_birthday"]:checked');
+            const show = anyBirthday && anyBirthday.value === 'yes';
+            document.querySelectorAll('.birthday-toggle').forEach(el => {
+                el.style.display = show ? '' : 'none';
+            });
+        }
+        window.onload = function() {
+            updatePeopleFields();
+            updateBirthdayToggles();
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>TipEase: Flask Tip Calculator</h2>
+        <form method="post">
+            <label>Bill Amount ($): <input type="number" name="bill" min="0" step="0.01" required></label>
+            <label>Tip Percentage (%): <input type="number" name="tip" min="0" max="100" step="1" required></label>
+            <label>Number of people splitting (1-30): <input type="number" id="num_people" name="num_people" min="1" max="30" value="1" required onchange="updatePeopleFields()"></label>
+            <label>Is anyone celebrating a birthday today?
+                <input type="radio" name="any_birthday" value="yes" onchange="updateBirthdayToggles()"> Yes
+                <input type="radio" name="any_birthday" value="no" checked onchange="updateBirthdayToggles()"> No
+            </label>
+            <div id="people_fields"></div>
+            <button type="submit">Calculate</button>
+        </form>
+        {% if error %}
+            <div style="color:red;">Error: {{ error }}</div>
+        {% endif %}
+        {% if result %}
+            <div class="result">
+                <h3>--- Overall Calculation Summary ---</h3>
+                <p>Original Bill: ${{ '%.2f'|format(result.bill_amount) }}</p>
+                <p>Tip Percentage: {{ '%.0f'|format(result.tip_percentage) }}%</p>
+                <p>Calculated Tip: ${{ '%.2f'|format(result.tip_amount) }}</p>
+                <p>Total Bill (including tip): ${{ '%.2f'|format(result.total_bill) }}</p>
+                <p>Number of people splitting: {{ result.num_people }}</p>
+                <p>Number of people actually paying: {{ result.paying_people_count }}</p>
+                <hr>
+                <h4>--- Individual Breakdown ---</h4>
+                {% for person in result.person_details %}
+                    <div>
+                        <strong>{{ person.name }} (Person {{ person.id }}):</strong><br>
+                        Payment Method: {{ person.payment_method|capitalize }}<br>
+                        {% if person.is_birthday %}
+                            Amount to Pay: $0.00 (Birthday - Not Paying)
+                        {% else %}
+                            {% if person.payment_method == 'card' %}
+                                Total to Pay: ${{ '%.2f'|format(result.bill_per_paying_person) }}<br>
+                                - Bill Portion: ${{ '%.2f'|format(result.individual_bill_portion) }}<br>
+                                - Tip Portion: ${{ '%.2f'|format(result.individual_tip_portion) }}
+                            {% else %}
+                                Amount to Pay: ${{ '%.2f'|format(result.bill_per_paying_person) }}
+                            {% endif %}
+                        {% endif %}
+                        <hr>
+                    </div>
+                {% endfor %}
+                <h4>--- Payment Method Summary ---</h4>
+                <p>Total to collect in Cash: ${{ '%.2f'|format(result.cash_total_owed) }}</p>
+                <p>Total to collect by Card: ${{ '%.2f'|format(result.card_total_owed) }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
