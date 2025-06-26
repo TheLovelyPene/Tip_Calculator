@@ -3,7 +3,8 @@
 # This program calculates the tip amount and the total bill based on user input.
 # It now includes features for splitting the bill among multiple people,
 # tracking payment methods (cash/card), a birthday toggle for non-payment,
-# and detailed breakdowns including individual names and card payment specifics.
+# individual names, detailed card payment specifics, and a clear payment summary.
+# Final touches for improved user experience have been applied.
 
 def calculate_tip():
     """
@@ -12,9 +13,11 @@ def calculate_tip():
     Then calculates and displays the overall tip and total,
     along with individual amounts to pay, payment methods,
     and a summary of cash vs. card totals.
+    Ensures robust input validation and clear output.
     """
     print("--- Welcome to TipEase! ---")
     print("Let's calculate your tip and total bill, and split it!")
+    print("\n--- Getting Bill and Tip Details ---") # Added introductory line
 
     # --- 1. Gather Initial Inputs (Bill Amount & Tip Percentage) ---
     bill_amount = 0.0
@@ -50,6 +53,7 @@ def calculate_tip():
     total_bill = bill_amount + tip_amount
 
     # --- 3. Gather Split Bill & Individual Payment Inputs ---
+    print("\n--- Setting Up the Split ---") # Added introductory line
     num_people = 0
     while True:
         try:
@@ -75,6 +79,7 @@ def calculate_tip():
     person_details = []
     paying_people_count = 0
 
+    print("\n--- Enter Details for Each Person ---") # Added introductory line
     for i in range(num_people):
         person_info = {}
         person_info['id'] = i + 1
@@ -175,6 +180,8 @@ def calculate_tip():
     print(f"Total to collect in Cash: ${cash_total_owed:.2f}")
     print(f"Total to collect by Card: ${card_total_owed:.2f}")
     print("------------------------------\n")
+
+    print("Thank you for using TipEase! Have a great day!") # Final goodbye message
 
 # Call the main function to run the tip calculator when the script is executed.
 if __name__ == "__main__":
