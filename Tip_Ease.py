@@ -1,15 +1,17 @@
-## --- TipEase: Simple Tip Calculator ---
+# --- TipEase: Simple Tip Calculator ---
 #
 # This program calculates the tip amount and the total bill based on user input.
 # It now includes features for splitting the bill among multiple people,
-# tracking payment methods (cash/card), and a birthday toggle for non-payment.
+# tracking payment methods (cash/card), a birthday toggle for non-payment,
+# and detailed breakdowns including individual names and card payment specifics.
 
 def calculate_tip():
     """
     Prompts the user for bill amount, tip percentage, number of people,
-    individual payment methods, and birthday status.
+    individual names, payment methods, and birthday status.
     Then calculates and displays the overall tip and total,
-    along with individual amounts to pay and payment methods.
+    along with individual amounts to pay, payment methods,
+    and a summary of cash vs. card totals.
     """
     print("--- Welcome to TipEase! ---")
     print("Let's calculate your tip and total bill, and split it!")
@@ -60,6 +62,16 @@ def calculate_tip():
         except ValueError:
             print("Invalid input. Please enter a whole number for the number of people.")
 
+    # Ask if anyone is celebrating a birthday upfront
+    any_birthday = False
+    while True:
+        any_birthday_str = input("Is anyone celebrating a birthday today? (yes/no): ").strip().lower()
+        if any_birthday_str in ['yes', 'no']:
+            any_birthday = (any_birthday_str == 'yes')
+            break
+        else:
+            print("Invalid input. Please enter 'yes' or 'no'.")
+
     person_details = []
     paying_people_count = 0
 
@@ -67,32 +79,47 @@ def calculate_tip():
         person_info = {}
         person_info['id'] = i + 1
 
+        # Prompt for person's name
+        person_info['name'] = input(f"Person {i + 1}: What is their name? (e.g., John): ").strip()
+        if not person_info['name']: # Default name if left blank
+            person_info['name'] = f"Person {i + 1}"
+
         # Get payment method (cash/card)
         while True:
-            payment_method = input(f"Person {i + 1}: Paying by cash or card? (cash/card): ").strip().lower()
+            payment_method = input(f"{person_info['name']}: Paying by cash or card? (cash/card): ").strip().lower()
             if payment_method in ['cash', 'card']:
                 person_info['payment_method'] = payment_method
                 break
             else:
                 print("Invalid input. Please enter 'cash' or 'card'.")
 
-        # Get birthday status
-        while True:
-            is_birthday_str = input(f"Person {i + 1}: Is it their birthday? (yes/no): ").strip().lower()
-            if is_birthday_str in ['yes', 'no']:
-                person_info['is_birthday'] = (is_birthday_str == 'yes')
-                if not person_info['is_birthday']:
-                    paying_people_count += 1 # Only count if not birthday
-                break
-            else:
-                print("Invalid input. Please enter 'yes' or 'no'.")
+        # Get birthday status only if 'any_birthday' was true
+        if any_birthday:
+            while True:
+                is_birthday_str = input(f"{person_info['name']}: Is it their birthday? (yes/no): ").strip().lower()
+                if is_birthday_str in ['yes', 'no']:
+                    person_info['is_birthday'] = (is_birthday_str == 'yes')
+                    if not person_info['is_birthday']:
+                        paying_people_count += 1 # Only count if not birthday
+                    break
+                else:
+                    print("Invalid input. Please enter 'yes' or 'no'.")
+        else:
+            # If no one is celebrating a birthday, everyone pays
+            person_info['is_birthday'] = False
+            paying_people_count += 1 # Everyone contributes
 
         person_details.append(person_info)
 
     # --- 4. Calculate Individual Amounts ---
     bill_per_paying_person = 0.0
+    individual_bill_portion = 0.0 # Portion of the original bill for each paying person
+    individual_tip_portion = 0.0  # Portion of the total tip for each paying person
+
     if paying_people_count > 0:
         bill_per_paying_person = total_bill / paying_people_count
+        individual_bill_portion = bill_amount / paying_people_count
+        individual_tip_portion = tip_amount / paying_people_count
     else:
         # This case happens if everyone is having a birthday and no one is paying
         print("\nEveryone is celebrating a birthday! The total bill is $0 for those paying.")
@@ -112,25 +139,36 @@ def calculate_tip():
     card_total_owed = 0.0
 
     for person in person_details:
+        person_name = person['name']
         person_id = person['id']
         payment_method = person['payment_method']
         is_birthday = person['is_birthday']
 
         amount_to_pay = 0.0
+        status = ""
+
         if is_birthday:
             amount_to_pay = 0.0 # Birthday means no payment
             status = "(Birthday - Not Paying)"
         else:
             amount_to_pay = bill_per_paying_person
-            status = ""
             if payment_method == 'cash':
                 cash_total_owed += amount_to_pay
             else: # card
                 card_total_owed += amount_to_pay
 
-        print(f"Person {person_id}:")
+        print(f"{person_name} (Person {person_id}):")
         print(f"  Payment Method: {payment_method.capitalize()}")
-        print(f"  Amount to Pay: ${amount_to_pay:.2f} {status}")
+
+        if is_birthday:
+            print(f"  Amount to Pay: ${amount_to_pay:.2f} {status}")
+        elif payment_method == 'card':
+            # Detailed breakdown for card payments
+            print(f"  Total to Pay: ${amount_to_pay:.2f}")
+            print(f"    - Bill Portion: ${individual_bill_portion:.2f}")
+            print(f"    - Tip Portion:  ${individual_tip_portion:.2f}")
+        else: # cash payment
+            print(f"  Amount to Pay: ${amount_to_pay:.2f}")
         print("-" * 20) # Separator for readability
 
     print("\n--- Payment Method Summary ---")
