@@ -1,33 +1,5 @@
-# TipEase
-To quickly calculate tip amounts and total bill, making dining out simpler.
-
-## Tip Calculator Code
-
-Here's the complete Python implementation for TipEase:
-
-```python
-# --- TipEase: Simple Tip Calculator ---
-#
-# This program calculates the tip amount and the total bill based on user input.
-# It covers the essential core features for the first version of TipEase.
-
-def calculate_tip():
-    """
-    Prompts the user for bill amount and tip percentage,
-    then calculates and displays the tip and total bill.
-    """
-    print("--- Welcome to TipEase! ---")
-    print("Let's calculate your tip and total bill.")
-
-    # 1. Gather Inputs
-    # Get the bill amount from the user.
-    # Use a loop to ensure valid numerical input.
-    while True:
-        try:
-            bill_amount_str = input("Enter the total bill amount (e.g., 50.75): $")
-            bill_amount = float(bill_amount_str)
-            if bill_amount < 0:
-                print("Bill amount cannot be negative. Please enter a positive number.")
+TipEaseAbout This ProjectThe purpose of TipEase is to provide users with a quick, easy, and accurate tool for calculating tips and final bill totals. It simplifies the process of dining out or tipping for services by allowing users to split bills among multiple people, track payment methods (cash or card), and account for special cases like birthdays where a person might not contribute to the bill.How It Works (Core Logic)TipEase is a console-based Python application that follows these main logical steps:Initial Input Gathering:It first prompts the user to enter the total bill amount and the desired tip percentage. Robust input validation is in place to ensure these are valid numerical entries.Overall Calculation:Based on the bill amount and tip percentage, it calculates the total tip amount and the grand total bill (bill + tip).Split Setup and Individual Details:The program then asks for the total number of people splitting the bill (up to 30), with validation.It includes a preliminary question: "Is anyone celebrating a birthday today?" This acts as a global toggle.For each person, it prompts for their name, their preferred payment method (cash or card), and, if the global birthday toggle was 'yes', it asks if it's their birthday. Input is validated for each of these prompts.Individual Amount Calculation:The program determines the number of 'paying' people (excluding those celebrating a birthday).The total bill (including tip) is then divided equally among only the paying individuals to calculate each person's share.If everyone is a birthday person, it gracefully handles the case where no one pays.Display Results:Finally, TipEase presents a comprehensive summary:Overall Summary: Shows the original bill, tip percentage, calculated tip, and the grand total bill.Individual Breakdown: For each person, it lists their name, payment method, and the amount they need to pay. For card payments, it provides a detailed breakdown of their portion of the original bill and their portion of the tip. Birthday celebrants are clearly marked as not paying.Payment Method Summary: Provides a clear total amount to be collected in cash versus the total to be paid by card.How to Run ItTo run the TipEase project:Save the Code: Copy the Python code provided (from the tipease_python_code artifact) and save it in a file named tipease.py (or any other name ending with .py) on your computer.Open Terminal/Command Prompt: Navigate to the directory where you saved tipease.py using your terminal or command prompt.Execute the Script: Run the script using the Python interpreter:python tipease.py
+Follow Prompts: The program will then guide you through the process by asking for the bill amount, tip percentage, number of people, and individual details.. Please enter a positive number.")
             else:
                 break # Exit loop if input is valid
         except ValueError:
