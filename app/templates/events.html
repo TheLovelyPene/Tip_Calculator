@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - TipEase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6B6B, #FF5252);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .event-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .event-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            position: relative;
+        }
+        
+        .event-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        
+        .event-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .event-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .event-body {
+            padding: 25px;
+        }
+        
+        .event-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .event-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #333;
+            font-size: 0.9em;
+        }
+        
+        .event-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .guest-count {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .event-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-view {
+            background: #FF6B6B;
+            color: white;
+        }
+        
+        .btn-view:hover {
+            background: #FF5252;
+        }
+        
+        .btn-join {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-join:hover {
+            background: #218838;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #666;
+        }
+        
+        .empty-state h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .empty-state p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .event-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .event-stats {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+            
+            .event-actions {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <h1>🎉 Events</h1>
+                <p>Discover and join amazing gatherings</p>
+            </div>
+            <a href="/create_event" class="btn">+ Create Event</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div id="eventsContainer">
+            <div class="loading">Loading events... 🎉</div>
+        </div>
+    </div>
+
+    <script>
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                weekday: 'short', 
+                month: 'short', 
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+        
+        function formatTime(timeString) {
+            if (!timeString) return '';
+            const time = new Date(`2000-01-01T${timeString}`);
+            return time.toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
+                minute: '2-digit',
+                hour12: true 
+            });
+        }
+        
+        function getStatusBadge(status) {
+            const statusConfig = {
+                'planning': { text: 'Planning', color: '#FFA500' },
+                'active': { text: 'Active', color: '#28a745' },
+                'completed': { text: 'Completed', color: '#6c757d' }
+            };
+            
+            const config = statusConfig[status] || statusConfig['planning'];
+            return `<span class="event-status" style="background: ${config.color}">${config.text}</span>`;
+        }
+        
+        function renderEvents(events) {
+            const container = document.getElementById('eventsContainer');
+            
+            if (events.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h2>🎉 No Events Yet</h2>
+                        <p>Be the first to create an amazing event!</p>
+                        <a href="/create_event" class="btn btn-view" style="display: inline-block; padding: 15px 30px;">Create Your First Event</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            const eventsHTML = events.map(event => {
+                const dateObj = new Date(event.date);
+                const isPast = dateObj < new Date();
+                const status = isPast ? 'completed' : (event.status || 'planning');
+                
+                return `
+                    <div class="event-card" onclick="window.location.href='/event/${event.id}'">
+                        <div class="event-header">
+                            ${getStatusBadge(status)}
+                            <div class="event-title">${event.title}</div>
+                            <div class="event-meta">
+                                <span>📅 ${formatDate(event.date)}</span>
+                                <span>🕐 ${formatTime(event.time)}</span>
+                            </div>
+                        </div>
+                        <div class="event-body">
+                            ${event.description ? `<div class="event-description">${event.description}</div>` : ''}
+                            <div class="event-details">
+                                ${event.location ? `<div class="detail-item">📍 ${event.location}</div>` : ''}
+                                <div class="detail-item">👤 ${event.organizer}</div>
+                                <div class="detail-item">👥 ${event.guests ? event.guests.length : 0} guests</div>
+                                ${event.bill_amount > 0 ? `<div class="detail-item">💰 $${event.bill_amount.toFixed(2)}</div>` : ''}
+                            </div>
+                            <div class="event-stats">
+                                <div class="guest-count">
+                                    ${event.guests ? event.guests.length : 0} people attending
+                                </div>
+                                <div class="event-actions">
+                                    <a href="/event/${event.id}" class="action-btn btn-view">View Event</a>
+                                    ${status === 'planning' ? `<a href="/event/${event.id}" class="action-btn btn-join">Join Event</a>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = `
+                <div class="events-grid">
+                    ${eventsHTML}
+                </div>
+            `;
+        }
+        
+        async function loadEvents() {
+            try {
+                const response = await fetch('/api/events');
+                const events = await response.json();
+                
+                // Sort events by date (upcoming first)
+                events.sort((a, b) => new Date(a.date) - new Date(b.date));
+                
+                renderEvents(events);
+            } catch (error) {
+                document.getElementById('eventsContainer').innerHTML = `
+                    <div class="empty-state">
+                        <h2>❌ Error Loading Events</h2>
+                        <p>Something went wrong. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Load events when page loads
+        document.addEventListener('DOMContentLoaded', loadEvents);
+    </script>
+</body>
+</html> 

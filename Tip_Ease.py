@@ -1,10 +1,13 @@
 # --- TipEase: Simple Tip Calculator ---
+# Copyright (c) 2025 [Your Name]. All rights reserved.
 #
 # This program calculates the tip amount and the total bill based on user input.
 # It now includes features for splitting the bill among multiple people,
 # tracking payment methods (cash/card), a birthday toggle for non-payment,
 # individual names, detailed card payment specifics, and a clear payment summary.
 # Final touches for improved user experience have been applied.
+#
+# Proprietary software - unauthorized copying, distribution, or use is prohibited.
 
 def calculate_tip():
     """

@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ event.title }} - TipEase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6B6B, #FF5252);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            opacity: 0.9;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+        
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .event-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .event-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .event-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1em;
+        }
+        
+        .event-description {
+            font-size: 1.1em;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .event-body {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .guests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .guest-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .guest-card.birthday {
+            border-color: #FFD700;
+            background: linear-gradient(135deg, #FFD700, #FFC107);
+            color: #333;
+        }
+        
+        .guest-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #FF6B6B;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0 auto 15px;
+        }
+        
+        .guest-name {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .guest-payment {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .guest-card.birthday .guest-payment {
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .comments-section {
+            margin-top: 40px;
+        }
+        
+        .comment {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .comment-author {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .comment-time {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .comment-text {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .comment.join-comment {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+        
+        .comment.join-comment .comment-author,
+        .comment.join-comment .comment-time,
+        .comment.join-comment .comment-text {
+            color: white;
+        }
+        
+        .comment-form {
+            margin-top: 20px;
+        }
+        
+        .comment-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 60px;
+            font-family: inherit;
+        }
+        
+        .comment-input:focus {
+            outline: none;
+            border-color: #FF6B6B;
+        }
+        
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .sidebar-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        .sidebar-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .join-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input, .form-group select {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #FF6B6B;
+        }
+        
+        .birthday-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .birthday-toggle input[type="checkbox"] {
+            transform: scale(1.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6B6B, #FF5252);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            margin-top: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+        }
+        
+        .bill-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+        
+        .bill-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .bill-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .summary-item:last-child {
+            margin-bottom: 0;
+            font-weight: 600;
+            font-size: 1.1em;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .event-meta {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .guests-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <h1>🎉 {{ event.title }}</h1>
+                <p>Event Details & Guest Management</p>
+            </div>
+            <a href="/events" class="btn">← Back to Events</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="event-hero">
+                <div class="event-title">{{ event.title }}</div>
+                <div class="event-meta">
+                    <div class="meta-item">📅 {{ event.date }}</div>
+                    <div class="meta-item">🕐 {{ event.time }}</div>
+                    {% if event.location %}
+                    <div class="meta-item">📍 {{ event.location }}</div>
+                    {% endif %}
+                </div>
+                {% if event.description %}
+                <div class="event-description">{{ event.description }}</div>
+                {% endif %}
+            </div>
+            
+            <div class="event-body">
+                <div class="section">
+                    <h3>👥 Guests ({{ event.guests|length }})</h3>
+                    <div class="guests-grid" id="guestsGrid">
+                        {% for guest in event.guests %}
+                        <div class="guest-card {% if guest.is_birthday %}birthday{% endif %}">
+                            <div class="guest-avatar">{{ guest.name[0].upper() }}</div>
+                            <div class="guest-name">{{ guest.name }}</div>
+                            <div class="guest-payment">
+                                {% if guest.is_birthday %}
+                                🎂 Birthday - Free!
+                                {% else %}
+                                {{ "💳" if guest.payment_method == "card" else "💵" }} {{ guest.payment_method.title() }}
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="comments-section">
+                    <h3>💬 Comments & Activity</h3>
+                    <div id="commentsContainer">
+                        {% for comment in event.comments %}
+                        <div class="comment {% if comment.type == 'join' %}join-comment{% endif %}">
+                            <div class="comment-header">
+                                <div class="comment-author">{{ comment.author }}</div>
+                                <div class="comment-time">{{ comment.timestamp }}</div>
+                            </div>
+                            <div class="comment-text">{{ comment.text }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="comment-form">
+                        <textarea class="comment-input" id="commentInput" placeholder="Add a comment..."></textarea>
+                        <button class="btn-primary" onclick="addComment()" style="margin-top: 10px;">💬 Post Comment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="sidebar-card">
+                <h3>🎉 Join Event</h3>
+                <form class="join-form" id="joinForm">
+                    <div class="form-group">
+                        <label for="guestName">Your Name *</label>
+                        <input type="text" id="guestName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestEmail">Email (optional)</label>
+                        <input type="email" id="guestEmail">
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentMethod">Payment Method</label>
+                        <select id="paymentMethod">
+                            <option value="card">💳 Card</option>
+                            <option value="cash">💵 Cash</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestBudget">How much can you afford? ($)</label>
+                        <input type="number" id="guestBudget" step="0.01" min="0" placeholder="e.g., 25.00">
+                        <small style="color: #666; font-size: 0.9em;">This helps calculate fair bill splitting</small>
+                    </div>
+                    <div class="birthday-toggle">
+                        <input type="checkbox" id="isBirthday">
+                        <label for="isBirthday">🎂 It's my birthday!</label>
+                    </div>
+                    <button type="submit" class="btn-primary">🎉 Join Event</button>
+                </form>
+                <div id="joinMessage"></div>
+            </div>
+            
+            <div class="sidebar-card">
+                <h3>💰 Bill Management</h3>
+                <form class="bill-form" id="billForm">
+                    <div class="form-group">
+                        <label for="billAmount">Bill Amount ($)</label>
+                        <input type="number" id="billAmount" step="0.01" min="0" value="{{ event.bill_amount }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipPercentage">Tip Percentage (%)</label>
+                        <input type="number" id="tipPercentage" min="0" max="100" value="{{ event.tip_percentage }}">
+                    </div>
+                    <button type="submit" class="btn-primary">💰 Update Bill</button>
+                </form>
+                
+                {% if event.bill_amount > 0 %}
+                <div class="bill-section">
+                    <h3>📊 Split Bill</h3>
+                    <button class="btn-primary btn-secondary" onclick="calculateBill()">🧮 Calculate Split</button>
+                    <div id="billResults"></div>
+                </div>
+                {% endif %}
+                
+                <div id="billMessage"></div>
+            </div>
+            
+            <!-- Party Fund Contributions -->
+            <div class="sidebar-card">
+                <h3>💝 Party Fund</h3>
+                <p style="color: #666; margin-bottom: 20px; font-size: 0.9em;">
+                    Contribute real money to help reduce everyone's bill!
+                </p>
+                
+                {% set total_party_fund = event.party_fund | map(attribute='amount') | sum %}
+                <div class="budget-summary" style="margin-bottom: 20px;">
+                    <div class="summary-item">
+                        <span>Total Contributions:</span>
+                        <span>${{ "%.2f"|format(total_party_fund) }}</span>
+                    </div>
+                </div>
+                
+                {% if event.milestones %}
+                <div class="milestones-section" style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
+                    <h4 style="margin-bottom: 10px;">🎯 Payment Milestones</h4>
+                    {% for milestone in event.milestones %}
+                    <div class="milestone" style="margin-bottom: 10px; padding: 10px; background: white; border-radius: 8px; border-left: 4px solid #007bff;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong>${{ "%.2f"|format(milestone.target_amount) }}</strong>
+                                <span style="color: #666; margin-left: 10px;">{{ milestone.description }}</span>
+                            </div>
+                            <div style="text-align: right;">
+                                {% set progress = (total_party_fund / milestone.target_amount * 100) if milestone.target_amount > 0 else 0 %}
+                                <div style="font-size: 0.9em; color: #666;">{{ "%.1f"|format(progress) }}%</div>
+                                <div style="width: 60px; height: 6px; background: #e9ecef; border-radius: 3px; overflow: hidden;">
+                                    <div style="width: {{ [progress, 100] | min }}%; height: 100%; background: #28a745;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                {% if event.payment_methods %}
+                <form class="join-form" id="contributeForm">
+                    <div class="form-group">
+                        <label for="contributorName">Your Name *</label>
+                        <input type="text" id="contributorName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contributionAmount">Amount ($) *</label>
+                        <input type="number" id="contributionAmount" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentMethod">Payment Method *</label>
+                        <select id="paymentMethod" required>
+                            <option value="">Choose payment method...</option>
+                            {% if event.payment_methods.paypal %}
+                            <option value="paypal">💳 PayPal</option>
+                            {% endif %}
+                            {% if event.payment_methods.cashapp %}
+                            <option value="cashapp">💚 Cash App</option>
+                            {% endif %}
+                            {% if event.payment_methods.venmo %}
+                            <option value="venmo">💙 Venmo</option>
+                            {% endif %}
+                            {% if event.payment_methods.zelle %}
+                            <option value="zelle">🏦 Zelle</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contributionMessage">Message (optional)</label>
+                        <input type="text" id="contributionMessage" placeholder="e.g., Happy Birthday!">
+                    </div>
+                    <div class="birthday-toggle">
+                        <input type="checkbox" id="isAnonymous">
+                        <label for="isAnonymous">🙈 Contribute anonymously</label>
+                    </div>
+                    <button type="submit" class="btn-primary">💳 Pay Now</button>
+                </form>
+                {% else %}
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; text-align: center;">
+                    <p style="color: #666; margin-bottom: 15px;">No payment methods configured</p>
+                    <p style="font-size: 0.9em; color: #999;">The organizer needs to add payment info to accept contributions</p>
+                </div>
+                {% endif %}
+                
+                {% if event.party_fund %}
+                <div style="margin-top: 20px;">
+                    <h4 style="margin-bottom: 15px; color: #666;">Recent Contributions:</h4>
+                    {% for contribution in event.party_fund[-3:] %}
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <span style="font-weight: 600;">{{ contribution.contributor_name if not contribution.is_anonymous else 'Anonymous' }}</span>
+                            <span style="color: #28a745; font-weight: 600;">${{ "%.2f"|format(contribution.amount) }}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <span style="color: #666; font-size: 0.9em;">
+                                {% if contribution.payment_method %}
+                                💳 {{ contribution.payment_method.title() }}
+                                {% else %}
+                                💝 Contribution
+                                {% endif %}
+                            </span>
+                            <span style="color: #666; font-size: 0.9em;">
+                                {% if contribution.status == 'completed' %}
+                                ✅ Paid
+                                {% elif contribution.status == 'pending' %}
+                                ⏳ Pending
+                                {% else %}
+                                💝 Gift
+                                {% endif %}
+                            </span>
+                        </div>
+                        {% if contribution.message %}
+                        <div style="color: #666; font-size: 0.9em;">"{{ contribution.message }}"</div>
+                        {% endif %}
+                        
+                        {% if contribution.status == 'pending' and contribution.payment_method == 'zelle' %}
+                        <div style="margin-top: 8px; display: flex; gap: 8px;">
+                            <button onclick="verifyPayment('{{ contribution.id }}')" class="btn-secondary" style="padding: 6px 12px; font-size: 0.8em;">
+                                ✅ Verify Payment
+                            </button>
+                            <button onclick="generateReceipt('{{ contribution.id }}')" class="btn-secondary" style="padding: 6px 12px; font-size: 0.8em;">
+                                📄 Receipt
+                            </button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <!-- Organizer Controls -->
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
+                    <h4 style="margin-bottom: 15px; color: #666;">🎛️ Organizer Controls</h4>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button onclick="setMilestone()" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">
+                            🎯 Set Milestone
+                        </button>
+                        <button onclick="show2FACode()" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">
+                            🔐 Show 2FA Code
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="contributeMessage"></div>
+            </div>
+            
+            <!-- Budget Overview (Organizer Only) -->
+            {% if event.guests %}
+            <div class="sidebar-card">
+                <h3>📋 Budget Overview</h3>
+                <div class="budget-summary">
+                    {% set total_budget = event.guests | selectattr('is_birthday', 'equalto', false) | map(attribute='budget') | sum %}
+                    <div class="summary-item">
+                        <span>Total Budget:</span>
+                        <span>${{ "%.2f"|format(total_budget) }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Party Fund:</span>
+                        <span>${{ "%.2f"|format(total_party_fund) }}</span>
+                    </div>
+                    {% if event.bill_amount > 0 %}
+                    {% set total_with_tip = event.bill_amount * (1 + event.tip_percentage / 100) %}
+                    <div class="summary-item">
+                        <span>Bill + Tip:</span>
+                        <span>${{ "%.2f"|format(total_with_tip) }}</span>
+                    </div>
+                    <div class="summary-item" style="font-weight: 600; color: {% if (total_budget + total_party_fund) >= total_with_tip %}#28a745{% else %}#dc3545{% endif %};">
+                        <span>Status:</span>
+                        <span>{% if (total_budget + total_party_fund) >= total_with_tip %}✅ Within Budget{% else %}⚠️ Over Budget{% endif %}</span>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div style="margin-top: 20px;">
+                    <h4 style="margin-bottom: 15px; color: #666;">Individual Budgets:</h4>
+                    {% for guest in event.guests %}
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-weight: 600;">{{ guest.name }}</span>
+                        <span style="color: #666;">
+                            {% if guest.is_birthday %}
+                            🎂 Birthday
+                            {% else %}
+                            ${{ "%.2f"|format(guest.budget) }}
+                            {% endif %}
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        const eventId = '{{ event.id }}';
+        
+        function formatTime(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true
+            });
+        }
+        
+        function addComment() {
+            const commentText = document.getElementById('commentInput').value.trim();
+            if (!commentText) return;
+            
+            const author = document.getElementById('guestName').value || 'Anonymous';
+            
+            fetch(`/event/${eventId}/comment`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    author: author,
+                    text: commentText
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const commentsContainer = document.getElementById('commentsContainer');
+                    const commentDiv = document.createElement('div');
+                    commentDiv.className = 'comment';
+                    commentDiv.innerHTML = `
+                        <div class="comment-header">
+                            <div class="comment-author">${data.comment.author}</div>
+                            <div class="comment-time">${formatTime(data.comment.timestamp)}</div>
+                        </div>
+                        <div class="comment-text">${data.comment.text}</div>
+                    `;
+                    commentsContainer.appendChild(commentDiv);
+                    document.getElementById('commentInput').value = '';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+        
+        document.getElementById('joinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('guestName').value,
+                email: document.getElementById('guestEmail').value,
+                payment_method: document.getElementById('paymentMethod').value,
+                budget: parseFloat(document.getElementById('guestBudget').value) || 0,
+                is_birthday: document.getElementById('isBirthday').checked
+            };
+            
+            const messageDiv = document.getElementById('joinMessage');
+            messageDiv.innerHTML = '<div class="success">Joining event... 🎉</div>';
+            
+            fetch(`/event/${eventId}/join`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    messageDiv.innerHTML = '<div class="success">🎉 Successfully joined the event!</div>';
+                    location.reload(); // Refresh to show new guest
+                } else {
+                    messageDiv.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
+                }
+            })
+            .catch(error => {
+                messageDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            });
+        });
+        
+        document.getElementById('billForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                bill_amount: parseFloat(document.getElementById('billAmount').value),
+                tip_percentage: parseFloat(document.getElementById('tipPercentage').value)
+            };
+            
+            const messageDiv = document.getElementById('billMessage');
+            messageDiv.innerHTML = '<div class="success">Updating bill... 💰</div>';
+            
+            fetch(`/event/${eventId}/update_bill`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    messageDiv.innerHTML = '<div class="success">💰 Bill updated successfully!</div>';
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1000);
+                } else {
+                    messageDiv.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
+                }
+            })
+            .catch(error => {
+                messageDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            });
+        });
+        
+        function calculateBill() {
+            const resultsDiv = document.getElementById('billResults');
+            resultsDiv.innerHTML = '<div class="loading">Calculating... 🧮</div>';
+            
+            fetch(`/event/${eventId}/calculate`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.summary) {
+                    const { summary, individual_breakdowns } = data;
+                    
+                    let html = `
+                        <div class="bill-summary">
+                            <div class="summary-item">
+                                <span>Original Bill:</span>
+                                <span>$${summary.bill_amount.toFixed(2)}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Tip (${summary.tip_percentage}%):</span>
+                                <span>$${summary.tip_amount.toFixed(2)}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Total Amount:</span>
+                                <span>$${summary.total_amount.toFixed(2)}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Total Budget:</span>
+                                <span>$${summary.total_budget.toFixed(2)}</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Party Fund:</span>
+                                <span>$${summary.total_party_fund.toFixed(2)}</span>
+                            </div>
+                            <div class="summary-item" style="font-weight: 600; color: ${(summary.total_budget + summary.total_party_fund) >= summary.total_amount ? '#28a745' : '#dc3545'};">
+                                <span>Budget Status:</span>
+                                <span>${(summary.total_budget + summary.total_party_fund) >= summary.total_amount ? '✅ Within Budget' : '⚠️ Over Budget'}</span>
+                            </div>
+                        </div>
+                        <h4 style="margin-top: 20px; margin-bottom: 15px;">Individual Breakdown (Proportional to Budgets):</h4>
+                    `;
+                    
+                    individual_breakdowns.forEach(person => {
+                        html += `
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                                <div style="font-weight: 600; margin-bottom: 5px;">${person.name}</div>
+                                ${person.is_birthday ? 
+                                    `<div style="color: #FFD700; font-weight: 600;">🎂 ${person.birthday_message}</div>` :
+                                    `<div>
+                                        <div>Budget: $${person.budget.toFixed(2)}</div>
+                                        <div>Bill: $${person.bill_amount.toFixed(2)} | Tip: $${person.tip_amount.toFixed(2)} | Total: $${person.total_amount.toFixed(2)}</div>
+                                        <div style="font-size: 0.9em; color: #666; margin-top: 5px;">
+                                            ${person.budget >= person.total_amount ? '✅ Within budget' : '⚠️ Over budget'}
+                                        </div>
+                                    </div>`
+                                }
+                            </div>
+                        `;
+                    });
+                    
+                    resultsDiv.innerHTML = html;
+                } else {
+                    resultsDiv.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
+                }
+            })
+            .catch(error => {
+                resultsDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            });
+        }
+        
+        // Allow Enter key to submit comment
+        document.getElementById('commentInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                addComment();
+            }
+        });
+        
+        // Handle party fund contributions
+        document.getElementById('contributeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                contributor_name: document.getElementById('contributorName').value,
+                amount: parseFloat(document.getElementById('contributionAmount').value),
+                payment_method: document.getElementById('paymentMethod').value,
+                message: document.getElementById('contributionMessage').value,
+                is_anonymous: document.getElementById('isAnonymous').checked
+            };
+            
+            const messageDiv = document.getElementById('contributeMessage');
+            messageDiv.innerHTML = '<div class="success">Processing payment... 💳</div>';
+            
+            fetch(`/event/${eventId}/process_payment`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    if (data.contribution.payment_method === 'zelle') {
+                        messageDiv.innerHTML = `
+                            <div class="success">
+                                🏦 Zelle payment initiated! 
+                                <div style="margin-top: 10px; padding: 10px; background: #e8f5e8; border-radius: 8px;">
+                                    <strong>Instructions:</strong> ${data.contribution.payment_instructions}
+                                </div>
+                                
+                                <div style="margin-top: 15px;">
+                                    <h4 style="margin-bottom: 10px;">📱 Mobile Banking Apps:</h4>
+                                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                        <a href="${data.contribution.mobile_links.chase}" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">🏦 Chase</a>
+                                        <a href="${data.contribution.mobile_links.bankofamerica}" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">🏦 Bank of America</a>
+                                        <a href="${data.contribution.mobile_links.wellsfargo}" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">🏦 Wells Fargo</a>
+                                        <a href="${data.contribution.mobile_links.citibank}" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">🏦 Citi</a>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-top: 15px;">
+                                    <button onclick="showQRCode('${data.contribution.qr_code_url}')" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">
+                                        📱 Show QR Code
+                                    </button>
+                                </div>
+                                
+                                <a href="${data.payment_link}" style="color: #155724; text-decoration: underline; font-weight: 600; margin-top: 10px; display: inline-block;">
+                                    📧 Send email to organizer
+                                </a>
+                            </div>
+                        `;
+                    } else {
+                        messageDiv.innerHTML = `
+                            <div class="success">
+                                💳 Payment processed! 
+                                <a href="${data.payment_link}" target="_blank" style="color: #155724; text-decoration: underline; font-weight: 600;">
+                                    Click here to complete payment
+                                </a>
+                            </div>
+                        `;
+                    }
+                    setTimeout(() => {
+                        location.reload();
+                    }, 5000);
+                } else {
+                    messageDiv.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
+                }
+            })
+            .catch(error => {
+                messageDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            });
+        });
+        
+        // Show QR Code for Zelle payments
+        function showQRCode(qrCodeUrl) {
+            fetch(qrCodeUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.qr_code) {
+                        const modal = document.createElement('div');
+                        modal.style.cssText = `
+                            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                            background: rgba(0,0,0,0.8); display: flex; align-items: center;
+                            justify-content: center; z-index: 1000;
+                        `;
+                        modal.innerHTML = `
+                            <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; max-width: 400px;">
+                                <h3 style="margin-bottom: 20px;">🏦 Zelle QR Code</h3>
+                                <img src="${data.qr_code}" style="max-width: 300px; margin-bottom: 20px;">
+                                <p style="color: #666; margin-bottom: 20px;">Scan with your banking app to pay</p>
+                                <button onclick="this.parentElement.parentElement.remove()" class="btn-primary">
+                                    Close
+                                </button>
+                            </div>
+                        `;
+                        document.body.appendChild(modal);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading QR code:', error);
+                });
+        }
+        
+        // Verify payment (organizer only)
+        function verifyPayment(contributionId) {
+            const verificationCode = prompt('Enter 2FA verification code:');
+            if (!verificationCode) return;
+            
+            fetch(`/event/${eventId}/verify_payment/${contributionId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    verification_code: verificationCode,
+                    verifier_name: 'Organizer'
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Payment verified successfully!');
+                    location.reload();
+                } else {
+                    alert(`Error: ${data.error}`);
+                }
+            })
+            .catch(error => {
+                alert(`Error: ${error.message}`);
+            });
+        }
+        
+        // Generate receipt
+        function generateReceipt(contributionId) {
+            fetch(`/event/${eventId}/receipt/${contributionId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.receipt) {
+                        const receipt = data.receipt;
+                        const receiptText = `
+Payment Receipt
+===============
+Receipt ID: ${receipt.receipt_id}
+Event: ${receipt.event_title}
+Date: ${receipt.event_date}
+Contributor: ${receipt.contributor_name}
+Amount: $${receipt.amount.toFixed(2)}
+Payment Method: ${receipt.payment_method}
+Payment Date: ${receipt.payment_date}
+Verified: ${receipt.verified_date || 'Pending'}
+Message: ${receipt.message || 'None'}
+Organizer: ${receipt.organizer}
+                        `;
+                        
+                        const modal = document.createElement('div');
+                        modal.style.cssText = `
+                            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                            background: rgba(0,0,0,0.8); display: flex; align-items: center;
+                            justify-content: center; z-index: 1000;
+                        `;
+                        modal.innerHTML = `
+                            <div style="background: white; padding: 30px; border-radius: 15px; max-width: 500px; max-height: 80vh; overflow-y: auto;">
+                                <h3 style="margin-bottom: 20px;">📄 Payment Receipt</h3>
+                                <pre style="background: #f8f9fa; padding: 15px; border-radius: 8px; white-space: pre-wrap; font-family: monospace;">${receiptText}</pre>
+                                <button onclick="this.parentElement.parentElement.remove()" class="btn-primary" style="margin-top: 20px;">
+                                    Close
+                                </button>
+                            </div>
+                        `;
+                        document.body.appendChild(modal);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error generating receipt:', error);
+                });
+        }
+        
+        // Set payment milestone
+        function setMilestone() {
+            const targetAmount = prompt('Enter target amount for milestone:');
+            if (!targetAmount) return;
+            
+            const description = prompt('Enter milestone description:');
+            if (!description) return;
+            
+            fetch(`/event/${eventId}/milestone`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    target_amount: parseFloat(targetAmount),
+                    description: description
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Milestone set successfully!');
+                    location.reload();
+                } else {
+                    alert(`Error: ${data.error}`);
+                }
+            })
+            .catch(error => {
+                alert(`Error: ${error.message}`);
+            });
+        }
+        
+        // Show 2FA code for organizer
+        function show2FACode() {
+            // In a real app, this would be generated server-side
+            // For demo purposes, we'll use a simple hash
+            const code = btoa(eventId).substring(0, 6).toUpperCase();
+            
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.8); display: flex; align-items: center;
+                justify-content: center; z-index: 1000;
+            `;
+            modal.innerHTML = `
+                <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; max-width: 400px;">
+                    <h3 style="margin-bottom: 20px;">🔐 Two-Factor Authentication</h3>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                        <div style="font-size: 2em; font-weight: bold; color: #007bff; letter-spacing: 5px;">${code}</div>
+                        <p style="color: #666; margin-top: 10px;">Use this code to verify payments</p>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="btn-primary">
+                        Close
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+    </script>
+</body>
+</html> 

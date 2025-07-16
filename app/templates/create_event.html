@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event - TipEase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6B6B, #FF5252);
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #FF6B6B;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #FF6B6B, #FF5252);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            margin-top: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            box-shadow: 0 10px 20px rgba(108, 117, 125, 0.3);
+        }
+        
+        .preview-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px dashed #dee2e6;
+        }
+        
+        .preview-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .preview-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .preview-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .preview-details {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .preview-description {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .preview-meta {
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 1px solid #c3e6cb;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .preview-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎉 Create New Event</h1>
+            <p>Plan your next amazing gathering with friends</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="eventForm">
+                <div class="form-group">
+                    <label for="eventTitle">Event Title *</label>
+                    <input type="text" id="eventTitle" placeholder="e.g., Birthday Dinner at Italian Restaurant" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="eventDescription">Description</label>
+                    <textarea id="eventDescription" placeholder="Tell your guests what to expect..."></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventDate">Date *</label>
+                        <input type="date" id="eventDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventTime">Time *</label>
+                        <input type="time" id="eventTime" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="eventLocation">Location</label>
+                    <input type="text" id="eventLocation" placeholder="e.g., Joe's Italian Restaurant, 123 Main St">
+                </div>
+                
+                <div class="form-group">
+                    <label for="eventOrganizer">Organizer Name *</label>
+                    <input type="text" id="eventOrganizer" placeholder="Your name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Payment Methods (for Party Fund)</label>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-top: 10px;">
+                        <p style="color: #666; margin-bottom: 15px; font-size: 0.9em;">
+                            Add your payment info so guests can contribute real money to the party fund
+                        </p>
+                        
+                        <div class="form-group">
+                            <label for="paypalEmail">PayPal Email</label>
+                            <input type="email" id="paypalEmail" placeholder="your-email@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cashappTag">Cash App $Cashtag</label>
+                            <input type="text" id="cashappTag" placeholder="$YourCashtag">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="venmoUsername">Venmo Username</label>
+                            <input type="text" id="venmoUsername" placeholder="@YourUsername">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="zelleEmail">Zelle Email/Phone</label>
+                            <input type="text" id="zelleEmail" placeholder="your-email@bank.com or (555) 123-4567">
+                            <small style="color: #666; font-size: 0.8em;">Email or phone number registered with your bank</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn">🎉 Create Event</button>
+                <a href="/" class="btn btn-secondary" style="text-decoration: none; display: block; text-align: center;">← Back to Home</a>
+            </form>
+            
+            <div class="preview-section" id="previewSection" style="display: none;">
+                <h3>📋 Event Preview</h3>
+                <div class="preview-card" id="previewCard">
+                    <!-- Preview content will be inserted here -->
+                </div>
+            </div>
+            
+            <div id="message"></div>
+        </div>
+    </div>
+
+    <script>
+        // Set default date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById('eventDate').value = tomorrow.toISOString().split('T')[0];
+        
+        // Set default time to 7 PM
+        document.getElementById('eventTime').value = '19:00';
+        
+        // Real-time preview
+        function updatePreview() {
+            const title = document.getElementById('eventTitle').value;
+            const description = document.getElementById('eventDescription').value;
+            const date = document.getElementById('eventDate').value;
+            const time = document.getElementById('eventTime').value;
+            const location = document.getElementById('eventLocation').value;
+            const organizer = document.getElementById('eventOrganizer').value;
+            
+            if (title || description || date || time || location || organizer) {
+                const previewSection = document.getElementById('previewSection');
+                const previewCard = document.getElementById('previewCard');
+                
+                const dateObj = date ? new Date(date) : null;
+                const formattedDate = dateObj ? dateObj.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                }) : '';
+                
+                const formattedTime = time ? new Date(`2000-01-01T${time}`).toLocaleTimeString('en-US', { 
+                    hour: 'numeric', 
+                    minute: '2-digit',
+                    hour12: true 
+                }) : '';
+                
+                previewCard.innerHTML = `
+                    <div class="preview-title">${title || 'Untitled Event'}</div>
+                    <div class="preview-details">
+                        <strong>📅 ${formattedDate}</strong><br>
+                        <strong>🕐 ${formattedTime}</strong>
+                    </div>
+                    ${location ? `<div class="preview-details"><strong>📍 ${location}</strong></div>` : ''}
+                    ${description ? `<div class="preview-description">${description}</div>` : ''}
+                    <div class="preview-meta">
+                        <span>👤 Organized by: ${organizer || 'Anonymous'}</span>
+                        <span>👥 0 guests</span>
+                    </div>
+                `;
+                
+                previewSection.style.display = 'block';
+            } else {
+                document.getElementById('previewSection').style.display = 'none';
+            }
+        }
+        
+        // Add event listeners for real-time preview
+        document.getElementById('eventTitle').addEventListener('input', updatePreview);
+        document.getElementById('eventDescription').addEventListener('input', updatePreview);
+        document.getElementById('eventDate').addEventListener('change', updatePreview);
+        document.getElementById('eventTime').addEventListener('change', updatePreview);
+        document.getElementById('eventLocation').addEventListener('input', updatePreview);
+        document.getElementById('eventOrganizer').addEventListener('input', updatePreview);
+        
+        // Form submission
+        document.getElementById('eventForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                title: document.getElementById('eventTitle').value,
+                description: document.getElementById('eventDescription').value,
+                date: document.getElementById('eventDate').value,
+                time: document.getElementById('eventTime').value,
+                location: document.getElementById('eventLocation').value,
+                organizer: document.getElementById('eventOrganizer').value,
+                paypal_email: document.getElementById('paypalEmail').value,
+                cashapp_tag: document.getElementById('cashappTag').value,
+                venmo_username: document.getElementById('venmoUsername').value,
+                zelle_email: document.getElementById('zelleEmail').value
+            };
+            
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerHTML = '<div class="success">Creating your event... 🎉</div>';
+            
+            try {
+                const response = await fetch('/create_event', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Something went wrong');
+                }
+                
+                messageDiv.innerHTML = `
+                    <div class="success">
+                        🎉 Event created successfully! 
+                        <a href="/event/${data.event_id}" style="color: #155724; text-decoration: underline;">View Event</a>
+                    </div>
+                `;
+                
+                // Reset form
+                document.getElementById('eventForm').reset();
+                document.getElementById('eventDate').value = tomorrow.toISOString().split('T')[0];
+                document.getElementById('eventTime').value = '19:00';
+                updatePreview();
+                
+            } catch (error) {
+                messageDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        });
+        
+        // Initialize preview
+        updatePreview();
+    </script>
+</body>
+</html> 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tip Ease - Advanced Tip Calculator</title>
+    <title>TipEase - Social Event Planning & Bill Splitting</title>
     <style>
         * {
             margin: 0;
@@ -12,504 +12,248 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            color: #333;
         }
         
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        .header {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
             color: white;
-            text-align: center;
-            padding: 30px;
         }
         
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        .form-container {
-            padding: 40px;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: #4CAF50;
-        }
-        
-        .people-section {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-        }
-        
-        .people-section h3 {
-            color: #333;
+        .hero h1 {
+            font-size: 3.5em;
             margin-bottom: 20px;
-            text-align: center;
+            font-weight: 700;
         }
         
-        .person-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            opacity: 0.9;
         }
         
-        .person-card h4 {
-            color: #4CAF50;
-            margin-bottom: 15px;
-        }
-        
-        .person-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
-            align-items: end;
-        }
-        
-        .birthday-toggle {
+        .cta-buttons {
             display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .birthday-toggle input[type="checkbox"] {
-            width: auto;
-            transform: scale(1.2);
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         
         .btn {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
-            border: none;
             padding: 15px 30px;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 50px;
+            text-decoration: none;
             font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: none;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            width: 100%;
         }
         
-        .btn:hover {
+        .btn-primary {
+            background: #FF6B6B;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #FF5252;
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(76, 175, 80, 0.3);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
         }
         
         .btn-secondary {
-            background: linear-gradient(135deg, #2196F3, #1976D2);
-            margin-bottom: 15px;
-        }
-        
-        .results {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 12px;
-            margin-top: 30px;
-        }
-        
-        .summary-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .summary-card h3 {
-            color: #4CAF50;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .summary-item {
-            text-align: center;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-        
-        .summary-item .label {
-            font-weight: 600;
-            color: #666;
-            margin-bottom: 5px;
-        }
-        
-        .summary-item .value {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #4CAF50;
-        }
-        
-        .individual-breakdown {
-            margin-top: 25px;
-        }
-        
-        .person-result {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .person-result.birthday {
-            background: linear-gradient(135deg, #FFD700, #FFC107);
-            color: #333;
-        }
-        
-        .person-result h4 {
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .payment-method-badge {
-            background: #2196F3;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8em;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
-        .payment-method-badge.cash {
-            background: #4CAF50;
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
         }
         
-        .person-breakdown {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 15px;
+        .features {
+            padding: 80px 20px;
+            background: white;
         }
         
-        .breakdown-item {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .features h2 {
             text-align: center;
-            padding: 10px;
-            background: rgba(255,255,255,0.7);
-            border-radius: 6px;
-        }
-        
-        .breakdown-item .label {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 5px;
-        }
-        
-        .breakdown-item .value {
-            font-weight: bold;
+            font-size: 2.5em;
+            margin-bottom: 60px;
             color: #333;
         }
         
-        .birthday-message {
-            text-align: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            padding: 15px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 8px;
-            margin-top: 10px;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
         }
         
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border: 1px solid #f5c6cb;
+        .feature-card {
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 20px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
         }
         
-        .loading {
-            text-align: center;
-            padding: 20px;
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .feature-card p {
             color: #666;
+            line-height: 1.6;
+        }
+        
+        .stats {
+            background: #f8f9fa;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #FF6B6B;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
         }
         
         @media (max-width: 768px) {
-            .person-form {
-                grid-template-columns: 1fr;
+            .hero h1 {
+                font-size: 2.5em;
             }
             
-            .summary-grid {
-                grid-template-columns: 1fr;
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .person-breakdown {
-                grid-template-columns: 1fr;
+            .btn {
+                width: 100%;
+                max-width: 300px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🧾 Tip Ease</h1>
-            <p>Advanced Tip Calculator with Split & Payment Tracking</p>
-        </div>
-        
-        <div class="form-container">
-            <form id="tipForm">
-                <div class="form-group">
-                    <label for="billAmount">Bill Amount ($)</label>
-                    <input type="number" id="billAmount" step="0.01" min="0" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="tipPercentage">Tip Percentage (%)</label>
-                    <input type="number" id="tipPercentage" value="15" min="0" max="100" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="numPeople">Number of People</label>
-                    <input type="number" id="numPeople" value="1" min="1" max="20" required>
-                </div>
-                
-                <button type="button" class="btn btn-secondary" onclick="generatePeopleFields()">
-                    👥 Set Up People Details
-                </button>
-                
-                <div id="peopleSection" class="people-section" style="display: none;">
-                    <h3>👥 People Details</h3>
-                    <div id="peopleContainer"></div>
-                </div>
-                
-                <button type="submit" class="btn">💰 Calculate Tips</button>
-            </form>
-            
-            <div id="results" style="display: none;"></div>
+    <div class="hero">
+        <h1>🎉 TipEase</h1>
+        <p>Plan events, invite friends, and split bills effortlessly</p>
+        <div class="cta-buttons">
+            <a href="/create_event" class="btn btn-primary">Create Event</a>
+            <a href="/events" class="btn btn-secondary">Browse Events</a>
         </div>
     </div>
-
-    <script>
-        function generatePeopleFields() {
-            const numPeople = parseInt(document.getElementById('numPeople').value);
-            const peopleContainer = document.getElementById('peopleContainer');
-            const peopleSection = document.getElementById('peopleSection');
-            
-            if (numPeople < 1 || numPeople > 20) {
-                alert('Please enter a number between 1 and 20');
-                return;
-            }
-            
-            peopleContainer.innerHTML = '';
-            
-            for (let i = 1; i <= numPeople; i++) {
-                const personCard = document.createElement('div');
-                personCard.className = 'person-card';
-                personCard.innerHTML = `
-                    <h4>Person ${i}</h4>
-                    <div class="person-form">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" id="name_${i}" placeholder="Enter name" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Payment Method</label>
-                            <select id="payment_${i}" required>
-                                <option value="card">💳 Card</option>
-                                <option value="cash">💵 Cash</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="birthday-toggle">
-                                <input type="checkbox" id="birthday_${i}">
-                                🎂 It's their birthday!
-                            </label>
-                        </div>
-                    </div>
-                `;
-                peopleContainer.appendChild(personCard);
-            }
-            
-            peopleSection.style.display = 'block';
-        }
-        
-        document.getElementById('tipForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const billAmount = parseFloat(document.getElementById('billAmount').value);
-            const tipPercentage = parseFloat(document.getElementById('tipPercentage').value);
-            const numPeople = parseInt(document.getElementById('numPeople').value);
-            
-            // Collect people data
-            const people = [];
-            for (let i = 1; i <= numPeople; i++) {
-                const nameEl = document.getElementById(`name_${i}`);
-                const paymentEl = document.getElementById(`payment_${i}`);
-                const birthdayEl = document.getElementById(`birthday_${i}`);
-                
-                if (!nameEl || !paymentEl || !birthdayEl) {
-                    alert('Please set up people details first!');
-                    return;
-                }
-                
-                people.push({
-                    name: nameEl.value.trim() || `Person ${i}`,
-                    payment_method: paymentEl.value,
-                    is_birthday: birthdayEl.checked
-                });
-            }
-            
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = '<div class="loading">Calculating... 🧮</div>';
-            resultsDiv.style.display = 'block';
-            
-            try {
-                const response = await fetch('/calculate', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        bill_amount: billAmount,
-                        tip_percentage: tipPercentage,
-                        num_people: numPeople,
-                        people: people
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (!response.ok) {
-                    throw new Error(data.error || 'Something went wrong');
-                }
-                
-                displayResults(data);
-                
-            } catch (error) {
-                resultsDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
-            }
-        });
-        
-        function displayResults(data) {
-            const { summary, individual_breakdowns } = data;
-            const resultsDiv = document.getElementById('results');
-            
-            let html = `
-                <div class="results">
-                    <div class="summary-card">
-                        <h3>📊 Bill Summary</h3>
-                        <div class="summary-grid">
-                            <div class="summary-item">
-                                <div class="label">Original Bill</div>
-                                <div class="value">$${summary.bill_amount.toFixed(2)}</div>
-                            </div>
-                            <div class="summary-item">
-                                <div class="label">Tip (${summary.tip_percentage}%)</div>
-                                <div class="value">$${summary.tip_amount.toFixed(2)}</div>
-                            </div>
-                            <div class="summary-item">
-                                <div class="label">Total Amount</div>
-                                <div class="value">$${summary.total_amount.toFixed(2)}</div>
-                            </div>
-                            <div class="summary-item">
-                                <div class="label">People Paying</div>
-                                <div class="value">${summary.num_paying}/${summary.num_people}</div>
-                            </div>
-                            <div class="summary-item">
-                                <div class="label">Per Person</div>
-                                <div class="value">$${summary.total_per_person.toFixed(2)}</div>
-                            </div>
-                            <div class="summary-item">
-                                <div class="label">💳 Card Total</div>
-                                <div class="value">$${summary.card_total.toFixed(2)}</div>
-                            </div>
-                            <div class="summary-item">
-                                <div class="label">💵 Cash Total</div>
-                                <div class="value">$${summary.cash_total.toFixed(2)}</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="individual-breakdown">
-                        <h3 style="text-align: center; margin-bottom: 20px; color: #4CAF50;">👥 Individual Breakdown</h3>
-            `;
-            
-            individual_breakdowns.forEach(person => {
-                html += `
-                    <div class="person-result ${person.is_birthday ? 'birthday' : ''}">
-                        <h4>
-                            ${person.name}
-                            <span class="payment-method-badge ${person.payment_method}">
-                                ${person.payment_method === 'cash' ? '💵' : '💳'} ${person.payment_method.toUpperCase()}
-                            </span>
-                        </h4>
-                `;
-                
-                if (person.is_birthday) {
-                    html += `<div class="birthday-message">${person.birthday_message}</div>`;
-                } else {
-                    html += `
-                        <div class="person-breakdown">
-                            <div class="breakdown-item">
-                                <div class="label">Bill Share</div>
-                                <div class="value">$${person.bill_amount.toFixed(2)}</div>
-                            </div>
-                            <div class="breakdown-item">
-                                <div class="label">Tip Share</div>
-                                <div class="value">$${person.tip_amount.toFixed(2)}</div>
-                            </div>
-                            <div class="breakdown-item">
-                                <div class="label">Total to Pay</div>
-                                <div class="value">$${person.total_amount.toFixed(2)}</div>
-                            </div>
-                        </div>
-                    `;
-                }
-                
-                html += '</div>';
-            });
-            
-            html += '</div></div>';
-            
-            resultsDiv.innerHTML = html;
-        }
-        
-        // Initialize with default people fields
-        document.addEventListener('DOMContentLoaded', function() {
-            generatePeopleFields();
-        });
-    </script>
+    
+    <div class="features">
+        <div class="container">
+            <h2>Why Choose TipEase?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Easy Event Planning</h3>
+                    <p>Create events in seconds with our intuitive interface. Add details, set dates, and invite friends with just a few clicks.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Smart Guest Management</h3>
+                    <p>Track RSVPs, manage guest lists, and see who's coming in real-time. Perfect for any group size.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Automatic Bill Splitting</h3>
+                    <p>Split bills fairly among attendees, handle different payment methods, and even account for birthdays!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Social Features</h3>
+                    <p>Comment, react, and stay connected with your event attendees. Make planning fun and interactive.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Access your events anywhere, anytime. Our responsive design works perfectly on all devices.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎂</div>
+                    <h3>Birthday Perks</h3>
+                    <p>Special birthday features let the birthday person eat for free! Because everyone deserves a treat on their special day.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Events Created</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Happy Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$50K+</div>
+                    <div class="stat-label">Bills Split</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2024 TipEase. Making event planning and bill splitting a breeze! 🎉</p>
+    </div>
 </body>
 </html>
