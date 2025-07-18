@@ -456,6 +456,8 @@
                     </div>
                 </div>
                 
+                <button id="showSplitBtn">Show Bill Split</button>
+<div id="billSplitResults"></div>
                 <div class="comments-section">
                     <h3>💬 Comments & Activity</h3>
                     <div id="commentsContainer">
@@ -861,61 +863,44 @@
             })
             .then(response => response.json())
             .then(data => {
-                if (data.summary) {
-                    const { summary, individual_breakdowns } = data;
-                    
-                    let html = `
-                        <div class="bill-summary">
-                            <div class="summary-item">
-                                <span>Original Bill:</span>
-                                <span>$${summary.bill_amount.toFixed(2)}</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Tip (${summary.tip_percentage}%):</span>
-                                <span>$${summary.tip_amount.toFixed(2)}</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Total Amount:</span>
-                                <span>$${summary.total_amount.toFixed(2)}</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Total Budget:</span>
-                                <span>$${summary.total_budget.toFixed(2)}</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Party Fund:</span>
-                                <span>$${summary.total_party_fund.toFixed(2)}</span>
-                            </div>
-                            <div class="summary-item" style="font-weight: 600; color: ${(summary.total_budget + summary.total_party_fund) >= summary.total_amount ? '#28a745' : '#dc3545'};">
-                                <span>Budget Status:</span>
-                                <span>${(summary.total_budget + summary.total_party_fund) >= summary.total_amount ? '✅ Within Budget' : '⚠️ Over Budget'}</span>
-                            </div>
-                        </div>
-                        <h4 style="margin-top: 20px; margin-bottom: 15px;">Individual Breakdown (Proportional to Budgets):</h4>
-                    `;
-                    
-                    individual_breakdowns.forEach(person => {
-                        html += `
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 10px;">
-                                <div style="font-weight: 600; margin-bottom: 5px;">${person.name}</div>
-                                ${person.is_birthday ? 
-                                    `<div style="color: #FFD700; font-weight: 600;">🎂 ${person.birthday_message}</div>` :
-                                    `<div>
-                                        <div>Budget: $${person.budget.toFixed(2)}</div>
-                                        <div>Bill: $${person.bill_amount.toFixed(2)} | Tip: $${person.tip_amount.toFixed(2)} | Total: $${person.total_amount.toFixed(2)}</div>
-                                        <div style="font-size: 0.9em; color: #666; margin-top: 5px;">
-                                            ${person.budget >= person.total_amount ? '✅ Within budget' : '⚠️ Over budget'}
-                                        </div>
-                                    </div>`
-                                }
-                            </div>
-                        `;
-                    });
-                    
-                    resultsDiv.innerHTML = html;
-                } else {
+                if (data.error) {
                     resultsDiv.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
+                    return;
                 }
+                
+                let html = `
+                    <div class="bill-summary">
+                        <div class="summary-item">
+                            <span>Original Bill:</span>
+                            <span>$${data.bill_amount.toFixed(2)}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Tip (${data.tip_percentage}%):</span>
+                            <span>$${data.tip_amount.toFixed(2)}</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Total Amount:</span>
+                            <span>$${data.total_amount.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    <h4 style="margin-top: 20px; margin-bottom: 15px;">Individual Breakdown:</h4>
+                `;
+                
+                data.breakdown.forEach(person => {
+                    html += `
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                            <div style="font-weight: 600; margin-bottom: 5px;">${person.name}</div>
+                            ${person.is_birthday ? 
+                                `<div style="color: #FFD700; font-weight: 600;">🎂 Birthday! No payment required.</div>` :
+                                `<div>
+                                    <div>Bill: $${person.bill.toFixed(2)} | Tip: $${person.tip.toFixed(2)} | Total: $${person.total.toFixed(2)}</div>
+                                </div>`
+                            }
+                        </div>
+                    `;
+                });
+                
+                resultsDiv.innerHTML = html;
             })
             .catch(error => {
                 resultsDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
@@ -1169,5 +1154,39 @@ Organizer: ${receipt.organizer}
             document.body.appendChild(modal);
         }
     </script>
-</body>
+<script>
+    document.getElementById('showSplitBtn').onclick = function() {
+        // Get the event ID from the URL
+        const eventId = window.location.pathname.split('/').pop();
+        fetch(`/event/${eventId}/calculate`, {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                document.getElementById('billSplitResults').innerHTML = '<b>Error:</b> ' + data.error;
+                return;
+            }
+            let html = `<div style="background: #f8f9fa; padding: 20px; border-radius: 15px; margin-top: 20px;">
+                        <h4 style="margin-bottom: 15px;">💰 Bill Split Results</h4>
+                        <div style="margin-bottom: 10px;"><b>Bill:</b> $${data.bill_amount.toFixed(2)}</div>
+                        <div style="margin-bottom: 10px;"><b>Tip (${data.tip_percentage}%):</b> $${data.tip_amount.toFixed(2)}</div>
+                        <div style="margin-bottom: 15px;"><b>Total:</b> $${data.total_amount.toFixed(2)}</div>
+                        <div style="margin-bottom: 10px;"><b>Breakdown:</b></div>
+                        <ul style="list-style: none; padding: 0;">`;
+            data.breakdown.forEach(person => {
+                html += `<li style="padding: 8px 0; border-bottom: 1px solid #eee;">
+                            <strong>${person.name}:</strong> 
+                            ${person.is_birthday ? '🎂 Birthday! No payment.' : `$${person.bill.toFixed(2)} bill + $${person.tip.toFixed(2)} tip = <span style="color: #28a745; font-weight: bold;">$${person.total.toFixed(2)}</span>`}
+                        </li>`;
+            });
+            html += '</ul></div>';
+            document.getElementById('billSplitResults').innerHTML = html;
+        })
+        .catch(error => {
+            document.getElementById('billSplitResults').innerHTML = '<div style="color: red; padding: 10px;">Error: ' + error.message + '</div>';
+        });
+    };
+    </script>
+    </body>
 </html> 

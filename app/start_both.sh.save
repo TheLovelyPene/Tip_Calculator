@@ -1,0 +1,6 @@
+#!/bin/bash
+# Start app.py on port 5000
+python3 app.py &
+# Start app_2.py on port 5001
+python3 app_2.py &
+wait

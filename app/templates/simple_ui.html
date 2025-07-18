@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TipEase Simple Bill Splitter</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f8f9fa; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 10px #0001; padding: 30px; }
+        h1 { text-align: center; color: #764ba2; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+        .person-block { background: #f3f3f3; border-radius: 8px; padding: 15px; margin-top: 15px; }
+        .btn { background: #764ba2; color: #fff; border: none; padding: 12px 25px; border-radius: 5px; font-size: 1em; margin-top: 20px; cursor: pointer; }
+        .btn:hover { background: #667eea; }
+        .error { color: #c00; margin-top: 15px; }
+        .result { background: #e8f5e9; border-radius: 8px; padding: 15px; margin-top: 20px; }
+        .summary { margin-bottom: 10px; }
+        .breakdown { margin-top: 10px; }
+        .breakdown-item { background: #f8f9fa; border-radius: 5px; padding: 8px; margin-bottom: 5px; }
+    </style>
+    <script>
+        function updatePeopleFields() {
+            const num = parseInt(document.getElementById('num_people').value) || 1;
+            const peopleDiv = document.getElementById('peopleFields');
+            peopleDiv.innerHTML = '';
+            for (let i = 0; i < num; i++) {
+                peopleDiv.innerHTML += `
+                <div class="person-block">
+                    <label>Name for Person ${i+1}: <input name="name_${i}" required></label>
+                    <label>Payment Method:
+                        <select name="payment_method_${i}">
+                            <option value="cash">Cash</option>
+                            <option value="card">Card</option>
+                        </select>
+                    </label>
+                    <label>Birthday? <input type="checkbox" name="is_birthday_${i}"></label>
+                    <label>Budget ($): <input type="number" name="budget_${i}" min="0" step="0.01" value="0"></label>
+                </div>
+                `;
+            }
+        }
+        window.onload = updatePeopleFields;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>TipEase Simple Bill Splitter</h1>
+        <form method="POST">
+            <label>Bill Amount ($): <input type="number" name="bill_amount" min="0" step="0.01" required></label>
+            <label>Tip Percentage (%): <input type="number" name="tip_percentage" min="0" step="1" value="15" required></label>
+            <label>Number of People: <input type="number" id="num_people" name="num_people" min="1" max="20" value="2" required onchange="updatePeopleFields()"></label>
+            <div id="peopleFields"></div>
+            <button class="btn" type="submit">Calculate</button>
+        </form>
+        {% if error %}
+            <div class="error">Error: {{ error }}</div>
+        {% endif %}
+        {% if result %}
+            <div class="result">
+                <div class="summary">
+                    <strong>Bill:</strong> ${{ result.summary.bill_amount }}<br>
+                    <strong>Tip ({{ result.summary.tip_percentage }}%):</strong> ${{ result.summary.tip_amount }}<br>
+                    <strong>Total:</strong> ${{ result.summary.total_amount }}<br>
+                    <strong>Total Budget:</strong> ${{ result.summary.total_budget }}<br>
+                    <strong>Cash Tip Total:</strong> ${{ result.summary.cash_tip_total }}<br>
+                    <strong>Rounded Cash Tip:</strong> ${{ result.summary.rounded_cash_tip }}<br>
+                    <strong>Extra Per Cash Payer:</strong> ${{ result.summary.extra_per_cash_payer }}<br>
+                    <strong>Total Cash to Collect:</strong> ${{ result.summary.total_cash_collected }}
+                </div>
+                <div class="breakdown">
+                    <strong>Individual Breakdown:</strong>
+                    {% for person in result.individual_breakdowns %}
+                        <div class="breakdown-item">
+                            <strong>{{ person.name }}</strong> - {{ person.payment_method|capitalize }}<br>
+                            {% if person.is_birthday %}
+                                🎂 <em>Birthday! No payment needed.</em>
+                            {% else %}
+                                Bill: ${{ person.bill_amount }} | Tip: ${{ person.tip_amount }} | Total: ${{ person.total_amount }}<br>
+                                Budget: ${{ person.budget }}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html> 
