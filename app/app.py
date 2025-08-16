@@ -33,14 +33,25 @@ def create_event():
             'time': data.get('time'),
             'location': data.get('location', ''),
             'organizer': data.get('organizer', 'Anonymous'),
+            'expected_budget': float(data.get('expected_budget', 0)),
+            'capacity': data.get('capacity'),
             'created_at': datetime.now().isoformat(),
             'guests': [],
             'bill_amount': 0,
             'tip_percentage': 15,
             'status': 'planning',
+        join_message = f"🎉 {guest['name']} joined the event!"
+        if guest['message']:
+            join_message += f" Message: \"{guest['message']}\""
+        if guest['budget'] > 0:
+            join_message += f" Pre-committed: ${guest['budget']:.2f}"
+        
             'comments': [],
             'party_fund': [],
-            'payment_methods': {}
+            'budget': float(data.get('budget', 0)),
+            'text': join_message,
+            'dietary_restrictions': data.get('dietary_restrictions', ''),
+            'commitment_level': 'high' if float(data.get('budget', 0)) >= 30 else 'medium' if float(data.get('budget', 0)) >= 15 else 'low'
         }
         events[event_id] = event
         return jsonify({'success': True, 'event_id': event_id})

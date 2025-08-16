@@ -233,6 +233,18 @@
                 </div>
                 
                 <div class="form-group">
+                    <label for="expectedBudget">Expected Budget Per Person ($)</label>
+                    <input type="number" id="expectedBudget" step="0.01" min="0" placeholder="e.g., 25.00">
+                    <small style="color: #666; font-size: 0.9em;">Help guests understand the expected contribution range</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="eventCapacity">Maximum Capacity (optional)</label>
+                    <input type="number" id="eventCapacity" min="1" placeholder="e.g., 20">
+                    <small style="color: #666; font-size: 0.9em;">Leave blank for unlimited capacity</small>
+                </div>
+                
+                <div class="form-group">
                     <label>Payment Methods (for Party Fund)</label>
                     <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-top: 10px;">
                         <p style="color: #666; margin-bottom: 15px; font-size: 0.9em;">
@@ -352,6 +364,8 @@
                 time: document.getElementById('eventTime').value,
                 location: document.getElementById('eventLocation').value,
                 organizer: document.getElementById('eventOrganizer').value,
+                expected_budget: parseFloat(document.getElementById('expectedBudget').value) || 0,
+                capacity: parseInt(document.getElementById('eventCapacity').value) || null,
                 paypal_email: document.getElementById('paypalEmail').value,
                 cashapp_tag: document.getElementById('cashappTag').value,
                 venmo_username: document.getElementById('venmoUsername').value,

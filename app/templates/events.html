@@ -318,15 +318,19 @@
                                 ${event.location ? `<div class="detail-item">📍 ${event.location}</div>` : ''}
                                 <div class="detail-item">👤 ${event.organizer}</div>
                                 <div class="detail-item">👥 ${event.guests ? event.guests.length : 0} guests</div>
+                                ${event.capacity ? `<div class="detail-item">🎯 ${event.capacity} max</div>` : ''}
+                                ${event.expected_budget > 0 ? `<div class="detail-item">💰 ~$${event.expected_budget.toFixed(0)} pp</div>` : ''}
                                 ${event.bill_amount > 0 ? `<div class="detail-item">💰 $${event.bill_amount.toFixed(2)}</div>` : ''}
                             </div>
                             <div class="event-stats">
                                 <div class="guest-count">
-                                    ${event.guests ? event.guests.length : 0} people attending
+                                    ${event.guests ? event.guests.length : 0}${event.capacity ? `/${event.capacity}` : ''} people attending
+                                    ${event.guests && event.guests.length > 0 ? `<br><small style="color: #28a745;">$${event.guests.reduce((sum, g) => sum + (g.budget || 0), 0).toFixed(0)} pre-committed</small>` : ''}
                                 </div>
                                 <div class="event-actions">
                                     <a href="/event/${event.id}" class="action-btn btn-view">View Event</a>
-                                    ${status === 'planning' ? `<a href="/event/${event.id}" class="action-btn btn-join">Join Event</a>` : ''}
+                                    ${status === 'planning' && (!event.capacity || (event.guests ? event.guests.length : 0) < event.capacity) ? `<a href="/event/${event.id}" class="action-btn btn-join">Join Event</a>` : ''}
+                                    ${status === 'planning' && event.capacity && (event.guests ? event.guests.length : 0) >= event.capacity ? `<span class="action-btn" style="background: #6c757d; cursor: not-allowed;">Full</span>` : ''}
                                 </div>
                             </div>
                         </div>

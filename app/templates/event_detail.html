@@ -261,6 +261,180 @@
             gap: 10px;
         }
         
+        .community-stats {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .community-stats h4 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .stat-number {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        .pre-payment-section {
+            background: #e8f5e8;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #28a745;
+        }
+        
+        .pre-payment-section h4 {
+            color: #155724;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .affordability-slider {
+            margin: 15px 0;
+        }
+        
+        .affordability-slider input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .affordability-display {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #28a745;
+            margin: 10px 0;
+        }
+        
+        .community-feed {
+            max-height: 400px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .feed-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .feed-item.payment {
+            border-left-color: #28a745;
+        }
+        
+        .feed-item.join {
+            border-left-color: #ffc107;
+        }
+        
+        .feed-item.milestone {
+            border-left-color: #dc3545;
+        }
+        
+        .feed-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .feed-author {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .feed-time {
+            font-size: 0.8em;
+            color: #666;
+        }
+        
+        .organizer-insights {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .organizer-insights h4 {
+            color: #856404;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .insight-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .insight-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .insight-value {
+            font-weight: bold;
+            color: #856404;
+        }
+        
+        .commitment-level {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .commitment-high {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .commitment-medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .commitment-low {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
         .join-form {
             display: flex;
             flex-direction: column;
@@ -434,6 +608,19 @@
                 {% if event.description %}
                 <div class="event-description">{{ event.description }}</div>
                 {% endif %}
+                {% if event.expected_budget > 0 %}
+                <div style="background: rgba(255, 255, 255, 0.2); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                    <strong>💰 Expected Budget: ~${{ "%.0f"|format(event.expected_budget) }} per person</strong>
+                </div>
+                {% endif %}
+                {% if event.capacity %}
+                <div style="background: rgba(255, 255, 255, 0.2); padding: 15px; border-radius: 10px; margin-top: 15px;">
+                    <strong>🎯 Capacity: {{ event.guests|length }}/{{ event.capacity }} people</strong>
+                    {% if event.guests|length >= event.capacity %}
+                    <div style="color: #ffeb3b; margin-top: 5px;">⚠️ Event is at full capacity</div>
+                    {% endif %}
+                </div>
+                {% endif %}
             </div>
             
             <div class="event-body">
@@ -483,6 +670,48 @@
         <div class="sidebar">
             <div class="sidebar-card">
                 <h3>🎉 Join Event</h3>
+                
+                <!-- Community Stats -->
+                <div class="community-stats">
+                    <h4>🌟 Community Impact</h4>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalCommitted">$0</div>
+                            <div class="stat-label">Pre-committed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="communitySize">{{ event.guests|length }}</div>
+                            <div class="stat-label">Community</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="avgCommitment">$0</div>
+                            <div class="stat-label">Avg. Commitment</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="participationRate">0%</div>
+                            <div class="stat-label">Participation</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pre-payment Section -->
+                <div class="pre-payment-section">
+                    <h4>💰 Pre-commit Based on What You Can Afford</h4>
+                    <p style="color: #155724; margin-bottom: 15px; font-size: 0.9em;">
+                        Help the organizer plan better by pre-committing what you can comfortably afford. This builds trust and community!
+                    </p>
+                    
+                    <div class="affordability-slider">
+                        <label for="affordabilityRange" style="font-weight: 600; color: #155724;">What can you afford?</label>
+                        <input type="range" id="affordabilityRange" min="0" max="100" value="25" step="5">
+                        <div class="affordability-display" id="affordabilityDisplay">$25.00</div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.8em; color: #666;">
+                            <span>$0</span>
+                            <span>$100+</span>
+                        </div>
+                    </div>
+                </div>
+                
                 <form class="join-form" id="joinForm">
                     <div class="form-group">
                         <label for="guestName">Your Name *</label>
@@ -501,8 +730,16 @@
                     </div>
                     <div class="form-group">
                         <label for="guestBudget">How much can you afford? ($)</label>
-                        <input type="number" id="guestBudget" step="0.01" min="0" placeholder="e.g., 25.00">
+                        <input type="number" id="guestBudget" step="0.01" min="0" placeholder="e.g., 25.00" readonly>
                         <small style="color: #666; font-size: 0.9em;">This helps calculate fair bill splitting</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="guestMessage">Message to Community (optional)</label>
+                        <input type="text" id="guestMessage" placeholder="e.g., Excited to celebrate with everyone!">
+                    </div>
+                    <div class="form-group">
+                        <label for="dietaryRestrictions">Dietary Restrictions/Preferences</label>
+                        <input type="text" id="dietaryRestrictions" placeholder="e.g., Vegetarian, No nuts">
                     </div>
                     <div class="birthday-toggle">
                         <input type="checkbox" id="isBirthday">
@@ -511,6 +748,59 @@
                     <button type="submit" class="btn-primary">🎉 Join Event</button>
                 </form>
                 <div id="joinMessage"></div>
+            </div>
+            
+            <!-- Organizer Insights -->
+            <div class="sidebar-card">
+                <div class="organizer-insights">
+                    <h4>📊 Organizer Insights</h4>
+                    <div class="insight-item">
+                        <span class="insight-label">Total Pre-commitments:</span>
+                        <span class="insight-value" id="totalPreCommitments">$0.00</span>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-label">Expected Attendance:</span>
+                        <span class="insight-value">{{ event.guests|length }} people</span>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-label">Budget Coverage:</span>
+                        <span class="insight-value" id="budgetCoverage">0%</span>
+                    </div>
+                    <div class="insight-item">
+                        <span class="insight-label">Community Engagement:</span>
+                        <span class="insight-value">
+                            <span class="commitment-level commitment-medium" id="engagementLevel">Building</span>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Guest Commitment Levels -->
+                <h4 style="margin-bottom: 15px; color: #666;">👥 Guest Commitment Levels</h4>
+                <div id="guestCommitments">
+                    {% for guest in event.guests %}
+                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                            <span style="font-weight: 600;">{{ guest.name }}</span>
+                            <span style="color: #28a745; font-weight: 600;">${{ "%.2f"|format(guest.budget or 0) }}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: #666; font-size: 0.9em;">
+                                {% if guest.is_birthday %}
+                                🎂 Birthday Guest
+                                {% else %}
+                                💳 {{ guest.payment_method.title() }}
+                                {% endif %}
+                            </span>
+                            <span class="commitment-level {% if guest.budget >= 30 %}commitment-high{% elif guest.budget >= 15 %}commitment-medium{% else %}commitment-low{% endif %}">
+                                {% if guest.budget >= 30 %}High{% elif guest.budget >= 15 %}Medium{% else %}Low{% endif %}
+                            </span>
+                        </div>
+                        {% if guest.message %}
+                        <div style="color: #666; font-size: 0.9em; margin-top: 5px; font-style: italic;">"{{ guest.message }}"</div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
             
             <div class="sidebar-card">
@@ -683,6 +973,29 @@
                 <div id="contributeMessage"></div>
             </div>
             
+            <!-- Community Activity Feed -->
+            <div class="sidebar-card">
+                <h3>📢 Community Activity</h3>
+                <div class="community-feed" id="communityFeed">
+                    {% for comment in event.comments[-10:] %}
+                    <div class="feed-item {{ comment.type }}">
+                        <div class="feed-header">
+                            <span class="feed-author">{{ comment.author }}</span>
+                            <span class="feed-time">{{ comment.timestamp }}</span>
+                        </div>
+                        <div>{{ comment.text }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div style="margin-top: 15px;">
+                    <input type="text" id="quickComment" placeholder="Share with the community..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                    <button onclick="addQuickComment()" style="width: 100%; margin-top: 8px; padding: 8px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                        💬 Share
+                    </button>
+                </div>
+            </div>
+            
             <!-- Budget Overview (Organizer Only) -->
             {% if event.guests %}
             <div class="sidebar-card">
@@ -732,6 +1045,98 @@
 
     <script>
         const eventId = '{{ event.id }}';
+        
+        // Update affordability slider
+        document.getElementById('affordabilityRange').addEventListener('input', function() {
+            const value = this.value;
+            const displayValue = value >= 100 ? '$100+' : `$${value}.00`;
+            document.getElementById('affordabilityDisplay').textContent = displayValue;
+            document.getElementById('guestBudget').value = value >= 100 ? 100 : value;
+        });
+        
+        // Update community stats
+        function updateCommunityStats() {
+            const guests = {{ event.guests | tojson }};
+            const totalCommitted = guests.reduce((sum, guest) => sum + (guest.budget || 0), 0);
+            const payingGuests = guests.filter(guest => !guest.is_birthday);
+            const avgCommitment = payingGuests.length > 0 ? totalCommitted / payingGuests.length : 0;
+            const participationRate = guests.length > 0 ? (payingGuests.length / guests.length) * 100 : 0;
+            
+            document.getElementById('totalCommitted').textContent = `$${totalCommitted.toFixed(0)}`;
+            document.getElementById('communitySize').textContent = guests.length;
+            document.getElementById('avgCommitment').textContent = `$${avgCommitment.toFixed(0)}`;
+            document.getElementById('participationRate').textContent = `${participationRate.toFixed(0)}%`;
+            
+            // Update organizer insights
+            document.getElementById('totalPreCommitments').textContent = `$${totalCommitted.toFixed(2)}`;
+            
+            const billAmount = {{ event.bill_amount or 0 }};
+            const tipAmount = billAmount * ({{ event.tip_percentage or 15 }} / 100);
+            const totalNeeded = billAmount + tipAmount;
+            const coverage = totalNeeded > 0 ? (totalCommitted / totalNeeded) * 100 : 0;
+            
+            document.getElementById('budgetCoverage').textContent = `${coverage.toFixed(0)}%`;
+            
+            // Update engagement level
+            const engagementEl = document.getElementById('engagementLevel');
+            if (coverage >= 80) {
+                engagementEl.textContent = 'Excellent';
+                engagementEl.className = 'commitment-level commitment-high';
+            } else if (coverage >= 50) {
+                engagementEl.textContent = 'Good';
+                engagementEl.className = 'commitment-level commitment-medium';
+            } else {
+                engagementEl.textContent = 'Building';
+                engagementEl.className = 'commitment-level commitment-low';
+            }
+        }
+        
+        // Add quick comment function
+        function addQuickComment() {
+            const commentText = document.getElementById('quickComment').value.trim();
+            if (!commentText) return;
+            
+            const author = document.getElementById('guestName').value || 'Anonymous';
+            
+            fetch(`/event/${eventId}/comment`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    author: author,
+                    text: commentText
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const feedDiv = document.getElementById('communityFeed');
+                    const feedItem = document.createElement('div');
+                    feedItem.className = 'feed-item comment';
+                    feedItem.innerHTML = `
+                        <div class="feed-header">
+                            <span class="feed-author">${data.comment.author}</span>
+                            <span class="feed-time">Just now</span>
+                        </div>
+                        <div>${data.comment.text}</div>
+                    `;
+                    feedDiv.insertBefore(feedItem, feedDiv.firstChild);
+                    document.getElementById('quickComment').value = '';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+        
+        // Allow Enter key for quick comments
+        document.getElementById('quickComment').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                addQuickComment();
+            }
+        });
         
         function formatTime(timestamp) {
             const date = new Date(timestamp);
@@ -790,7 +1195,9 @@
                 email: document.getElementById('guestEmail').value,
                 payment_method: document.getElementById('paymentMethod').value,
                 budget: parseFloat(document.getElementById('guestBudget').value) || 0,
-                is_birthday: document.getElementById('isBirthday').checked
+                is_birthday: document.getElementById('isBirthday').checked,
+                message: document.getElementById('guestMessage').value,
+                dietary_restrictions: document.getElementById('dietaryRestrictions').value
             };
             
             const messageDiv = document.getElementById('joinMessage');
@@ -906,6 +1313,9 @@
                 resultsDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
             });
         }
+        
+        // Initialize community stats
+        updateCommunityStats();
         
         // Allow Enter key to submit comment
         document.getElementById('commentInput').addEventListener('keypress', function(e) {
