@@ -18,67 +18,15 @@
         }
         
         .header {
-            background: linear-gradient(135deg, #FF6B6B, #FF5252);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px 20px;
+            position: relative;
         }
         
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .header h1 {
-            font-size: 1.8em;
-            margin-bottom: 5px;
-        }
-        
-        .header p {
-            opacity: 0.9;
-        }
-        
-        .btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 10px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-size: 0.9em;
-        }
-        
-        .btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
-        }
-        
-        .main-content {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        .event-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
         }
         
         .event-title {
@@ -89,335 +37,228 @@
         
         .event-meta {
             display: flex;
-            justify-content: center;
             gap: 30px;
-            margin-bottom: 20px;
+            font-size: 1.1em;
+            opacity: 0.9;
             flex-wrap: wrap;
         }
         
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 1.1em;
-        }
-        
-        .event-description {
-            font-size: 1.1em;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-        
-        .event-body {
-            padding: 40px;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-        }
-        
-        .section h3 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            color: #333;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .guests-grid {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
         }
         
-        .guest-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .guest-card.birthday {
-            border-color: #FFD700;
-            background: linear-gradient(135deg, #FFD700, #FFC107);
-            color: #333;
-        }
-        
-        .guest-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: #FF6B6B;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5em;
-            font-weight: 700;
-            margin: 0 auto 15px;
-        }
-        
-        .guest-name {
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .guest-payment {
-            font-size: 0.9em;
-            color: #666;
-        }
-        
-        .guest-card.birthday .guest-payment {
-            color: #333;
-            font-weight: 600;
-        }
-        
-        .comments-section {
-            margin-top: 40px;
-        }
-        
-        .comment {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .comment-author {
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .comment-time {
-            font-size: 0.9em;
-            color: #666;
-        }
-        
-        .comment-text {
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .comment.join-comment {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-        }
-        
-        .comment.join-comment .comment-author,
-        .comment.join-comment .comment-time,
-        .comment.join-comment .comment-text {
-            color: white;
-        }
-        
-        .comment-form {
-            margin-top: 20px;
-        }
-        
-        .comment-input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            font-size: 16px;
-            resize: vertical;
-            min-height: 60px;
-            font-family: inherit;
-        }
-        
-        .comment-input:focus {
-            outline: none;
-            border-color: #FF6B6B;
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
         
         .sidebar {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 20px;
         }
         
-        .sidebar-card {
+        .card {
             background: white;
-            border-radius: 20px;
+            border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            padding: 30px;
+            padding: 25px;
         }
         
-        .sidebar-card h3 {
-            font-size: 1.3em;
-            margin-bottom: 20px;
+        .card h3 {
             color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .community-stats {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #f0f0f0;
         }
         
-        .community-stats h4 {
-            margin-bottom: 15px;
-            text-align: center;
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
         
-        .stats-grid {
+        .tab.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+        }
+        
+        .tab-content {
+            padding: 30px;
+            min-height: 400px;
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        
+        .tab-pane.active {
+            display: block;
+        }
+        
+        .join-form {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 20px;
         }
         
-        .stat-item {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            border-radius: 10px;
-        }
-        
-        .stat-number {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .stat-label {
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-        
-        .pre-payment-section {
-            background: #e8f5e8;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            border-left: 5px solid #28a745;
-        }
-        
-        .pre-payment-section h4 {
-            color: #155724;
-            margin-bottom: 15px;
+        .form-group {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 8px;
         }
         
-        .affordability-slider {
-            margin: 15px 0;
-        }
-        
-        .affordability-slider input[type="range"] {
-            width: 100%;
-            margin: 10px 0;
-        }
-        
-        .affordability-display {
-            text-align: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #28a745;
-            margin: 10px 0;
-        }
-        
-        .community-feed {
-            max-height: 400px;
-            overflow-y: auto;
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 15px;
-        }
-        
-        .feed-item {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            border-left: 4px solid #007bff;
-        }
-        
-        .feed-item.payment {
-            border-left-color: #28a745;
-        }
-        
-        .feed-item.join {
-            border-left-color: #ffc107;
-        }
-        
-        .feed-item.milestone {
-            border-left-color: #dc3545;
-        }
-        
-        .feed-header {
-            display: flex;
-            justify-content: between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        
-        .feed-author {
-            font-weight: bold;
-            color: #333;
-        }
-        
-        .feed-time {
-            font-size: 0.8em;
-            color: #666;
-        }
-        
-        .organizer-insights {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .organizer-insights h4 {
-            color: #856404;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .insight-item {
-            background: white;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .insight-label {
+        .form-group label {
             font-weight: 600;
             color: #333;
         }
         
-        .insight-value {
-            font-weight: bold;
-            color: #856404;
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
         }
         
-        .commitment-level {
-            display: inline-block;
-            padding: 4px 8px;
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .affordability-slider {
+            margin: 20px 0;
+        }
+        
+        .slider-container {
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, #ff6b6b, #ffa500, #4caf50);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #667eea;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        .budget-display {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #667eea;
+            margin: 15px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+        }
+        
+        .btn-success {
+            background: #28a745;
+        }
+        
+        .guest-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .guest-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
             border-radius: 12px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .guest-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+        
+        .guest-info {
+            flex: 1;
+        }
+        
+        .guest-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .guest-details {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .commitment-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
             font-size: 0.8em;
-            font-weight: bold;
+            font-weight: 600;
         }
         
         .commitment-high {
@@ -435,150 +276,182 @@
             color: #721c24;
         }
         
-        .join-form {
+        .activity-feed {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .activity-item {
             display: flex;
-            flex-direction: column;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .activity-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-text {
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .activity-time {
+            font-size: 0.8em;
+            color: #666;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
         
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
         }
         
-        .form-group label {
-            font-weight: 600;
-            color: #333;
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
         }
         
-        .form-group input, .form-group select {
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 16px;
-            font-family: inherit;
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
         }
         
-        .form-group input:focus, .form-group select:focus {
-            outline: none;
-            border-color: #FF6B6B;
+        .media-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
         }
         
-        .birthday-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
+        .media-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f8f9fa;
         }
         
-        .birthday-toggle input[type="checkbox"] {
-            transform: scale(1.2);
+        .media-item img, .media-item video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
         }
         
-        .btn-primary {
-            background: linear-gradient(135deg, #FF6B6B, #FF5252);
+        .media-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
             color: white;
-            border: none;
             padding: 15px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 0.9em;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        .upload-area:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
         }
         
-        .btn-secondary {
-            background: #6c757d;
-            margin-top: 10px;
+        .upload-area.dragover {
+            border-color: #667eea;
+            background: #f0f4ff;
         }
         
-        .btn-secondary:hover {
-            background: #5a6268;
-            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
-        }
-        
-        .bill-section {
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 2px solid #eee;
-        }
-        
-        .bill-form {
+        .comment-form {
             display: flex;
-            flex-direction: column;
             gap: 15px;
-        }
-        
-        .bill-summary {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 15px;
             margin-top: 20px;
         }
         
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
+        .comment-input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
         }
         
-        .summary-item:last-child {
-            margin-bottom: 0;
-            font-weight: 600;
-            font-size: 1.1em;
-            border-top: 1px solid #ddd;
-            padding-top: 10px;
+        .comment-input:focus {
+            border-color: #667eea;
+        }
+        
+        .check-in-section {
+            background: #e8f5e9;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .live-updates {
+            background: #fff3e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
         
         .error {
             background: #f8d7da;
             color: #721c24;
             padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            margin: 15px 0;
         }
         
         .success {
             background: #d4edda;
             color: #155724;
             padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #666;
+            border-radius: 8px;
+            margin: 15px 0;
         }
         
         @media (max-width: 768px) {
             .container {
                 grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
             }
             
             .event-meta {
                 flex-direction: column;
-                gap: 15px;
+                gap: 10px;
             }
             
-            .guests-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            .tabs {
+                overflow-x: auto;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -586,1017 +459,719 @@
 <body>
     <div class="header">
         <div class="header-content">
-            <div>
-                <h1>🎉 {{ event.title }}</h1>
-                <p>Event Details & Guest Management</p>
+            <h1 class="event-title">{{ event.title }}</h1>
+            <div class="event-meta">
+                <span>📅 {{ event.date }}</span>
+                <span>🕐 {{ event.time }}</span>
+                {% if event.location %}
+                <span>📍 {{ event.location }}</span>
+                {% endif %}
+                <span>👤 {{ event.organizer }}</span>
             </div>
-            <a href="/events" class="btn">← Back to Events</a>
         </div>
     </div>
     
     <div class="container">
         <div class="main-content">
-            <div class="event-hero">
-                <div class="event-title">{{ event.title }}</div>
-                <div class="event-meta">
-                    <div class="meta-item">📅 {{ event.date }}</div>
-                    <div class="meta-item">🕐 {{ event.time }}</div>
-                    {% if event.location %}
-                    <div class="meta-item">📍 {{ event.location }}</div>
-                    {% endif %}
-                </div>
-                {% if event.description %}
-                <div class="event-description">{{ event.description }}</div>
-                {% endif %}
-                {% if event.expected_budget > 0 %}
-                <div style="background: rgba(255, 255, 255, 0.2); padding: 15px; border-radius: 10px; margin-top: 15px;">
-                    <strong>💰 Expected Budget: ~${{ "%.0f"|format(event.expected_budget) }} per person</strong>
-                </div>
-                {% endif %}
-                {% if event.capacity %}
-                <div style="background: rgba(255, 255, 255, 0.2); padding: 15px; border-radius: 10px; margin-top: 15px;">
-                    <strong>🎯 Capacity: {{ event.guests|length }}/{{ event.capacity }} people</strong>
-                    {% if event.guests|length >= event.capacity %}
-                    <div style="color: #ffeb3b; margin-top: 5px;">⚠️ Event is at full capacity</div>
-                    {% endif %}
-                </div>
-                {% endif %}
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('overview')">📋 Overview</div>
+                <div class="tab" onclick="showTab('join')">🎉 Join Event</div>
+                <div class="tab" onclick="showTab('activity')">💬 Activity</div>
+                <div class="tab" onclick="showTab('media')">📸 Media</div>
+                <div class="tab" onclick="showTab('checkin')">📍 Check-in</div>
             </div>
             
-            <div class="event-body">
-                <div class="section">
-                    <h3>👥 Guests ({{ event.guests|length }})</h3>
-                    <div class="guests-grid" id="guestsGrid">
-                        {% for guest in event.guests %}
-                        <div class="guest-card {% if guest.is_birthday %}birthday{% endif %}">
-                            <div class="guest-avatar">{{ guest.name[0].upper() }}</div>
-                            <div class="guest-name">{{ guest.name }}</div>
-                            <div class="guest-payment">
-                                {% if guest.is_birthday %}
-                                🎂 Birthday - Free!
-                                {% else %}
-                                {{ "💳" if guest.payment_method == "card" else "💵" }} {{ guest.payment_method.title() }}
-                                {% endif %}
-                            </div>
+            <div class="tab-content">
+                <div id="overview" class="tab-pane active">
+                    <h2>Event Details</h2>
+                    {% if event.description %}
+                    <p style="margin: 20px 0; line-height: 1.6; color: #666;">{{ event.description }}</p>
+                    {% endif %}
+                    
+                    <div class="stats-grid" style="margin: 30px 0;">
+                        <div class="stat-item">
+                            <div class="stat-value" id="guestCount">{{ event.guests|length if event.guests else 0 }}</div>
+                            <div class="stat-label">Guests Joined</div>
                         </div>
-                        {% endfor %}
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalCommitted">${{ "%.0f"|format(event.guests|sum(attribute='budget') if event.guests else 0) }}</div>
+                            <div class="stat-label">Pre-committed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="checkedInCount">{{ event.check_ins|length if event.check_ins else 0 }}</div>
+                            <div class="stat-label">Checked In</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="mediaCount">{{ event.media_gallery|length if event.media_gallery else 0 }}</div>
+                            <div class="stat-label">Photos/Videos</div>
+                        </div>
+                    </div>
+                    
+                    {% if event.expected_budget > 0 %}
+                    <div style="background: #f0f4ff; padding: 20px; border-radius: 12px; margin: 20px 0;">
+                        <h4 style="color: #667eea; margin-bottom: 10px;">💰 Expected Budget</h4>
+                        <p style="color: #666;">Approximately ${{ "%.0f"|format(event.expected_budget) }} per person</p>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div id="join" class="tab-pane">
+                    <h2>Join This Event</h2>
+                    <form id="joinForm" class="join-form">
+                        <div class="form-group">
+                            <label for="guestName">Your Name *</label>
+                            <input type="text" id="guestName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="guestEmail">Email (optional)</label>
+                            <input type="email" id="guestEmail">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="guestPhone">Phone (optional)</label>
+                            <input type="tel" id="guestPhone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="guestMessage">Message to the group (optional)</label>
+                            <textarea id="guestMessage" rows="3" placeholder="Say hello to everyone..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dietaryRestrictions">Dietary Restrictions/Preferences</label>
+                            <input type="text" id="dietaryRestrictions" placeholder="e.g., Vegetarian, Gluten-free, No allergies">
+                        </div>
+                        
+                        <div class="affordability-slider">
+                            <label>What can you comfortably afford? 💰</label>
+                            <div class="budget-display" id="budgetDisplay">$25</div>
+                            <div class="slider-container">
+                                <input type="range" id="budgetSlider" class="slider" min="0" max="100" value="25" step="5">
+                                <div class="slider-labels">
+                                    <span>$0</span>
+                                    <span>$25</span>
+                                    <span>$50</span>
+                                    <span>$75</span>
+                                    <span>$100+</span>
+                                </div>
+                            </div>
+                            <input type="hidden" id="guestBudget" value="25">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="paymentMethod">Preferred Payment Method</label>
+                            <select id="paymentMethod">
+                                <option value="card">💳 Card</option>
+                                <option value="cash">💵 Cash</option>
+                                <option value="venmo">📱 Venmo</option>
+                                <option value="cashapp">💰 CashApp</option>
+                                <option value="zelle">🏦 Zelle</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="isBirthday"> 🎂 It's my birthday!
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="btn">🎉 Join Event</button>
+                    </form>
+                    
+                    <div id="joinMessage"></div>
+                </div>
+                
+                <div id="activity" class="tab-pane">
+                    <h2>Community Activity</h2>
+                    
+                    <div class="comment-form">
+                        <input type="text" id="commentInput" class="comment-input" placeholder="Share something with the group...">
+                        <button type="button" class="btn" onclick="addComment()">Post</button>
+                    </div>
+                    
+                    <div class="activity-feed" id="activityFeed">
+                        <!-- Activity items will be loaded here -->
                     </div>
                 </div>
                 
-                <button id="showSplitBtn">Show Bill Split</button>
-<div id="billSplitResults"></div>
-                <div class="comments-section">
-                    <h3>💬 Comments & Activity</h3>
-                    <div id="commentsContainer">
-                        {% for comment in event.comments %}
-                        <div class="comment {% if comment.type == 'join' %}join-comment{% endif %}">
-                            <div class="comment-header">
-                                <div class="comment-author">{{ comment.author }}</div>
-                                <div class="comment-time">{{ comment.timestamp }}</div>
-                            </div>
-                            <div class="comment-text">{{ comment.text }}</div>
+                <div id="media" class="tab-pane">
+                    <h2>Event Photos & Videos</h2>
+                    
+                    <div id="mediaUploadSection" style="display: none;">
+                        <div class="upload-area" onclick="document.getElementById('mediaFile').click()">
+                            <div style="font-size: 3em; margin-bottom: 15px;">📸</div>
+                            <h3>Share Photos & Videos</h3>
+                            <p style="color: #666; margin-top: 10px;">Click to upload or drag files here</p>
+                            <p style="color: #999; font-size: 0.9em; margin-top: 5px;">Images: JPG, PNG, GIF | Videos: MP4, MOV | Max 16MB</p>
                         </div>
-                        {% endfor %}
+                        <input type="file" id="mediaFile" accept="image/*,video/*" style="display: none;" onchange="uploadMedia()">
+                        
+                        <div style="margin: 20px 0;">
+                            <input type="text" id="mediaCaption" placeholder="Add a caption..." style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px;">
+                        </div>
                     </div>
                     
-                    <div class="comment-form">
-                        <textarea class="comment-input" id="commentInput" placeholder="Add a comment..."></textarea>
-                        <button class="btn-primary" onclick="addComment()" style="margin-top: 10px;">💬 Post Comment</button>
+                    <div id="mediaNotAvailable" style="text-align: center; padding: 40px; color: #666;">
+                        <div style="font-size: 3em; margin-bottom: 15px;">📅</div>
+                        <h3>Media sharing available on event day</h3>
+                        <p>Come back on {{ event.date }} to share photos and videos!</p>
+                    </div>
+                    
+                    <div class="media-gallery" id="mediaGallery">
+                        <!-- Media items will be loaded here -->
+                    </div>
+                </div>
+                
+                <div id="checkin" class="tab-pane">
+                    <h2>Event Check-in</h2>
+                    
+                    <div id="checkInSection" style="display: none;">
+                        <div class="check-in-section">
+                            <h3>📍 Check in to the event</h3>
+                            <p style="margin: 15px 0; color: #666;">Let everyone know you've arrived!</p>
+                            <select id="checkInGuest" style="width: 100%; padding: 12px; margin: 15px 0; border: 2px solid #e0e0e0; border-radius: 8px;">
+                                <option value="">Select your name...</option>
+                            </select>
+                            <button type="button" class="btn btn-success" onclick="checkInGuest()">Check In</button>
+                        </div>
+                    </div>
+                    
+                    <div id="checkInNotAvailable" style="text-align: center; padding: 40px; color: #666;">
+                        <div style="font-size: 3em; margin-bottom: 15px;">📅</div>
+                        <h3>Check-in available on event day</h3>
+                        <p>Come back on {{ event.date }} to check in!</p>
+                    </div>
+                    
+                    <div class="live-updates">
+                        <h3>📢 Live Updates</h3>
+                        <div id="liveUpdates">
+                            <!-- Live updates will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div id="checkInList">
+                        <h3>Who's Here</h3>
+                        <div id="checkedInGuests">
+                            <!-- Checked in guests will be loaded here -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="sidebar">
-            <div class="sidebar-card">
-                <h3>🎉 Join Event</h3>
-                
-                <!-- Community Stats -->
-                <div class="community-stats">
-                    <h4>🌟 Community Impact</h4>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-number" id="totalCommitted">$0</div>
-                            <div class="stat-label">Pre-committed</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="communitySize">{{ event.guests|length }}</div>
-                            <div class="stat-label">Community</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="avgCommitment">$0</div>
-                            <div class="stat-label">Avg. Commitment</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="participationRate">0%</div>
-                            <div class="stat-label">Participation</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Pre-payment Section -->
-                <div class="pre-payment-section">
-                    <h4>💰 Pre-commit Based on What You Can Afford</h4>
-                    <p style="color: #155724; margin-bottom: 15px; font-size: 0.9em;">
-                        Help the organizer plan better by pre-committing what you can comfortably afford. This builds trust and community!
-                    </p>
-                    
-                    <div class="affordability-slider">
-                        <label for="affordabilityRange" style="font-weight: 600; color: #155724;">What can you afford?</label>
-                        <input type="range" id="affordabilityRange" min="0" max="100" value="25" step="5">
-                        <div class="affordability-display" id="affordabilityDisplay">$25.00</div>
-                        <div style="display: flex; justify-content: space-between; font-size: 0.8em; color: #666;">
-                            <span>$0</span>
-                            <span>$100+</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <form class="join-form" id="joinForm">
-                    <div class="form-group">
-                        <label for="guestName">Your Name *</label>
-                        <input type="text" id="guestName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="guestEmail">Email (optional)</label>
-                        <input type="email" id="guestEmail">
-                    </div>
-                    <div class="form-group">
-                        <label for="paymentMethod">Payment Method</label>
-                        <select id="paymentMethod">
-                            <option value="card">💳 Card</option>
-                            <option value="cash">💵 Cash</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="guestBudget">How much can you afford? ($)</label>
-                        <input type="number" id="guestBudget" step="0.01" min="0" placeholder="e.g., 25.00" readonly>
-                        <small style="color: #666; font-size: 0.9em;">This helps calculate fair bill splitting</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="guestMessage">Message to Community (optional)</label>
-                        <input type="text" id="guestMessage" placeholder="e.g., Excited to celebrate with everyone!">
-                    </div>
-                    <div class="form-group">
-                        <label for="dietaryRestrictions">Dietary Restrictions/Preferences</label>
-                        <input type="text" id="dietaryRestrictions" placeholder="e.g., Vegetarian, No nuts">
-                    </div>
-                    <div class="birthday-toggle">
-                        <input type="checkbox" id="isBirthday">
-                        <label for="isBirthday">🎂 It's my birthday!</label>
-                    </div>
-                    <button type="submit" class="btn-primary">🎉 Join Event</button>
-                </form>
-                <div id="joinMessage"></div>
-            </div>
-            
-            <!-- Organizer Insights -->
-            <div class="sidebar-card">
-                <div class="organizer-insights">
-                    <h4>📊 Organizer Insights</h4>
-                    <div class="insight-item">
-                        <span class="insight-label">Total Pre-commitments:</span>
-                        <span class="insight-value" id="totalPreCommitments">$0.00</span>
-                    </div>
-                    <div class="insight-item">
-                        <span class="insight-label">Expected Attendance:</span>
-                        <span class="insight-value">{{ event.guests|length }} people</span>
-                    </div>
-                    <div class="insight-item">
-                        <span class="insight-label">Budget Coverage:</span>
-                        <span class="insight-value" id="budgetCoverage">0%</span>
-                    </div>
-                    <div class="insight-item">
-                        <span class="insight-label">Community Engagement:</span>
-                        <span class="insight-value">
-                            <span class="commitment-level commitment-medium" id="engagementLevel">Building</span>
-                        </span>
-                    </div>
-                </div>
-                
-                <!-- Guest Commitment Levels -->
-                <h4 style="margin-bottom: 15px; color: #666;">👥 Guest Commitment Levels</h4>
-                <div id="guestCommitments">
-                    {% for guest in event.guests %}
-                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                            <span style="font-weight: 600;">{{ guest.name }}</span>
-                            <span style="color: #28a745; font-weight: 600;">${{ "%.2f"|format(guest.budget or 0) }}</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="color: #666; font-size: 0.9em;">
-                                {% if guest.is_birthday %}
-                                🎂 Birthday Guest
-                                {% else %}
-                                💳 {{ guest.payment_method.title() }}
-                                {% endif %}
-                            </span>
-                            <span class="commitment-level {% if guest.budget >= 30 %}commitment-high{% elif guest.budget >= 15 %}commitment-medium{% else %}commitment-low{% endif %}">
-                                {% if guest.budget >= 30 %}High{% elif guest.budget >= 15 %}Medium{% else %}Low{% endif %}
-                            </span>
-                        </div>
-                        {% if guest.message %}
-                        <div style="color: #666; font-size: 0.9em; margin-top: 5px; font-style: italic;">"{{ guest.message }}"</div>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
+            <div class="card">
+                <h3>👥 Community ({{ event.guests|length if event.guests else 0 }})</h3>
+                <div class="guest-list" id="guestList">
+                    <!-- Guest list will be loaded here -->
                 </div>
             </div>
             
-            <div class="sidebar-card">
-                <h3>💰 Bill Management</h3>
-                <form class="bill-form" id="billForm">
-                    <div class="form-group">
-                        <label for="billAmount">Bill Amount ($)</label>
-                        <input type="number" id="billAmount" step="0.01" min="0" value="{{ event.bill_amount }}">
+            <div class="card">
+                <h3>📊 Event Stats</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">${{ "%.0f"|format(event.guests|sum(attribute='budget') if event.guests else 0) }}</div>
+                        <div class="stat-label">Total Committed</div>
                     </div>
-                    <div class="form-group">
-                        <label for="tipPercentage">Tip Percentage (%)</label>
-                        <input type="number" id="tipPercentage" min="0" max="100" value="{{ event.tip_percentage }}">
+                    <div class="stat-item">
+                        <div class="stat-value">${{ "%.0f"|format((event.guests|sum(attribute='budget') / event.guests|length) if event.guests else 0) }}</div>
+                        <div class="stat-label">Avg per Person</div>
                     </div>
-                    <button type="submit" class="btn-primary">💰 Update Bill</button>
-                </form>
-                
-                {% if event.bill_amount > 0 %}
-                <div class="bill-section">
-                    <h3>📊 Split Bill</h3>
-                    <button class="btn-primary btn-secondary" onclick="calculateBill()">🧮 Calculate Split</button>
-                    <div id="billResults"></div>
-                </div>
-                {% endif %}
-                
-                <div id="billMessage"></div>
-            </div>
-            
-            <!-- Party Fund Contributions -->
-            <div class="sidebar-card">
-                <h3>💝 Party Fund</h3>
-                <p style="color: #666; margin-bottom: 20px; font-size: 0.9em;">
-                    Contribute real money to help reduce everyone's bill!
-                </p>
-                
-                {% set total_party_fund = event.party_fund | map(attribute='amount') | sum %}
-                <div class="budget-summary" style="margin-bottom: 20px;">
-                    <div class="summary-item">
-                        <span>Total Contributions:</span>
-                        <span>${{ "%.2f"|format(total_party_fund) }}</span>
-                    </div>
-                </div>
-                
-                {% if event.milestones %}
-                <div class="milestones-section" style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 10px;">
-                    <h4 style="margin-bottom: 10px;">🎯 Payment Milestones</h4>
-                    {% for milestone in event.milestones %}
-                    <div class="milestone" style="margin-bottom: 10px; padding: 10px; background: white; border-radius: 8px; border-left: 4px solid #007bff;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <strong>${{ "%.2f"|format(milestone.target_amount) }}</strong>
-                                <span style="color: #666; margin-left: 10px;">{{ milestone.description }}</span>
-                            </div>
-                            <div style="text-align: right;">
-                                {% set progress = (total_party_fund / milestone.target_amount * 100) if milestone.target_amount > 0 else 0 %}
-                                <div style="font-size: 0.9em; color: #666;">{{ "%.1f"|format(progress) }}%</div>
-                                <div style="width: 60px; height: 6px; background: #e9ecef; border-radius: 3px; overflow: hidden;">
-                                    <div style="width: {{ [progress, 100] | min }}%; height: 100%; background: #28a745;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endif %}
-                
-                {% if event.payment_methods %}
-                <form class="join-form" id="contributeForm">
-                    <div class="form-group">
-                        <label for="contributorName">Your Name *</label>
-                        <input type="text" id="contributorName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="contributionAmount">Amount ($) *</label>
-                        <input type="number" id="contributionAmount" step="0.01" min="0" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="paymentMethod">Payment Method *</label>
-                        <select id="paymentMethod" required>
-                            <option value="">Choose payment method...</option>
-                            {% if event.payment_methods.paypal %}
-                            <option value="paypal">💳 PayPal</option>
-                            {% endif %}
-                            {% if event.payment_methods.cashapp %}
-                            <option value="cashapp">💚 Cash App</option>
-                            {% endif %}
-                            {% if event.payment_methods.venmo %}
-                            <option value="venmo">💙 Venmo</option>
-                            {% endif %}
-                            {% if event.payment_methods.zelle %}
-                            <option value="zelle">🏦 Zelle</option>
-                            {% endif %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="contributionMessage">Message (optional)</label>
-                        <input type="text" id="contributionMessage" placeholder="e.g., Happy Birthday!">
-                    </div>
-                    <div class="birthday-toggle">
-                        <input type="checkbox" id="isAnonymous">
-                        <label for="isAnonymous">🙈 Contribute anonymously</label>
-                    </div>
-                    <button type="submit" class="btn-primary">💳 Pay Now</button>
-                </form>
-                {% else %}
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; text-align: center;">
-                    <p style="color: #666; margin-bottom: 15px;">No payment methods configured</p>
-                    <p style="font-size: 0.9em; color: #999;">The organizer needs to add payment info to accept contributions</p>
-                </div>
-                {% endif %}
-                
-                {% if event.party_fund %}
-                <div style="margin-top: 20px;">
-                    <h4 style="margin-bottom: 15px; color: #666;">Recent Contributions:</h4>
-                    {% for contribution in event.party_fund[-3:] %}
-                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 8px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                            <span style="font-weight: 600;">{{ contribution.contributor_name if not contribution.is_anonymous else 'Anonymous' }}</span>
-                            <span style="color: #28a745; font-weight: 600;">${{ "%.2f"|format(contribution.amount) }}</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                            <span style="color: #666; font-size: 0.9em;">
-                                {% if contribution.payment_method %}
-                                💳 {{ contribution.payment_method.title() }}
-                                {% else %}
-                                💝 Contribution
-                                {% endif %}
-                            </span>
-                            <span style="color: #666; font-size: 0.9em;">
-                                {% if contribution.status == 'completed' %}
-                                ✅ Paid
-                                {% elif contribution.status == 'pending' %}
-                                ⏳ Pending
-                                {% else %}
-                                💝 Gift
-                                {% endif %}
-                            </span>
-                        </div>
-                        {% if contribution.message %}
-                        <div style="color: #666; font-size: 0.9em;">"{{ contribution.message }}"</div>
-                        {% endif %}
-                        
-                        {% if contribution.status == 'pending' and contribution.payment_method == 'zelle' %}
-                        <div style="margin-top: 8px; display: flex; gap: 8px;">
-                            <button onclick="verifyPayment('{{ contribution.id }}')" class="btn-secondary" style="padding: 6px 12px; font-size: 0.8em;">
-                                ✅ Verify Payment
-                            </button>
-                            <button onclick="generateReceipt('{{ contribution.id }}')" class="btn-secondary" style="padding: 6px 12px; font-size: 0.8em;">
-                                📄 Receipt
-                            </button>
-                        </div>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                </div>
-                {% endif %}
-                
-                <!-- Organizer Controls -->
-                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
-                    <h4 style="margin-bottom: 15px; color: #666;">🎛️ Organizer Controls</h4>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button onclick="setMilestone()" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">
-                            🎯 Set Milestone
-                        </button>
-                        <button onclick="show2FACode()" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">
-                            🔐 Show 2FA Code
-                        </button>
-                    </div>
-                </div>
-                
-                <div id="contributeMessage"></div>
-            </div>
-            
-            <!-- Community Activity Feed -->
-            <div class="sidebar-card">
-                <h3>📢 Community Activity</h3>
-                <div class="community-feed" id="communityFeed">
-                    {% for comment in event.comments[-10:] %}
-                    <div class="feed-item {{ comment.type }}">
-                        <div class="feed-header">
-                            <span class="feed-author">{{ comment.author }}</span>
-                            <span class="feed-time">{{ comment.timestamp }}</span>
-                        </div>
-                        <div>{{ comment.text }}</div>
-                    </div>
-                    {% endfor %}
-                </div>
-                
-                <div style="margin-top: 15px;">
-                    <input type="text" id="quickComment" placeholder="Share with the community..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
-                    <button onclick="addQuickComment()" style="width: 100%; margin-top: 8px; padding: 8px; background: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer;">
-                        💬 Share
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Budget Overview (Organizer Only) -->
-            {% if event.guests %}
-            <div class="sidebar-card">
-                <h3>📋 Budget Overview</h3>
-                <div class="budget-summary">
-                    {% set total_budget = event.guests | selectattr('is_birthday', 'equalto', false) | map(attribute='budget') | sum %}
-                    <div class="summary-item">
-                        <span>Total Budget:</span>
-                        <span>${{ "%.2f"|format(total_budget) }}</span>
-                    </div>
-                    <div class="summary-item">
-                        <span>Party Fund:</span>
-                        <span>${{ "%.2f"|format(total_party_fund) }}</span>
-                    </div>
-                    {% if event.bill_amount > 0 %}
-                    {% set total_with_tip = event.bill_amount * (1 + event.tip_percentage / 100) %}
-                    <div class="summary-item">
-                        <span>Bill + Tip:</span>
-                        <span>${{ "%.2f"|format(total_with_tip) }}</span>
-                    </div>
-                    <div class="summary-item" style="font-weight: 600; color: {% if (total_budget + total_party_fund) >= total_with_tip %}#28a745{% else %}#dc3545{% endif %};">
-                        <span>Status:</span>
-                        <span>{% if (total_budget + total_party_fund) >= total_with_tip %}✅ Within Budget{% else %}⚠️ Over Budget{% endif %}</span>
-                    </div>
-                    {% endif %}
                 </div>
                 
                 <div style="margin-top: 20px;">
-                    <h4 style="margin-bottom: 15px; color: #666;">Individual Budgets:</h4>
-                    {% for guest in event.guests %}
-                    <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: 600;">{{ guest.name }}</span>
-                        <span style="color: #666;">
-                            {% if guest.is_birthday %}
-                            🎂 Birthday
-                            {% else %}
-                            ${{ "%.2f"|format(guest.budget) }}
-                            {% endif %}
-                        </span>
+                    <div style="font-weight: 600; margin-bottom: 10px;">Community Engagement</div>
+                    <div id="engagementLevel" style="padding: 10px; border-radius: 8px; text-align: center; font-weight: 600;">
+                        <!-- Engagement level will be calculated -->
                     </div>
-                    {% endfor %}
                 </div>
             </div>
-            {% endif %}
         </div>
     </div>
 
     <script>
         const eventId = '{{ event.id }}';
+        const eventDate = '{{ event.date }}';
+        const today = new Date().toISOString().split('T')[0];
+        const isEventDay = eventDate === today;
         
-        // Update affordability slider
-        document.getElementById('affordabilityRange').addEventListener('input', function() {
-            const value = this.value;
-            const displayValue = value >= 100 ? '$100+' : `$${value}.00`;
-            document.getElementById('affordabilityDisplay').textContent = displayValue;
-            document.getElementById('guestBudget').value = value >= 100 ? 100 : value;
-        });
+        // Show/hide event day features
+        if (isEventDay) {
+            document.getElementById('mediaUploadSection').style.display = 'block';
+            document.getElementById('mediaNotAvailable').style.display = 'none';
+            document.getElementById('checkInSection').style.display = 'block';
+            document.getElementById('checkInNotAvailable').style.display = 'none';
+        }
         
-        // Update community stats
-        function updateCommunityStats() {
-            const guests = {{ event.guests | tojson }};
-            const totalCommitted = guests.reduce((sum, guest) => sum + (guest.budget || 0), 0);
-            const payingGuests = guests.filter(guest => !guest.is_birthday);
-            const avgCommitment = payingGuests.length > 0 ? totalCommitted / payingGuests.length : 0;
-            const participationRate = guests.length > 0 ? (payingGuests.length / guests.length) * 100 : 0;
+        // Tab switching
+        function showTab(tabName) {
+            // Hide all tab panes
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.remove('active');
+            });
             
-            document.getElementById('totalCommitted').textContent = `$${totalCommitted.toFixed(0)}`;
-            document.getElementById('communitySize').textContent = guests.length;
-            document.getElementById('avgCommitment').textContent = `$${avgCommitment.toFixed(0)}`;
-            document.getElementById('participationRate').textContent = `${participationRate.toFixed(0)}%`;
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
             
-            // Update organizer insights
-            document.getElementById('totalPreCommitments').textContent = `$${totalCommitted.toFixed(2)}`;
+            // Show selected tab pane
+            document.getElementById(tabName).classList.add('active');
             
-            const billAmount = {{ event.bill_amount or 0 }};
-            const tipAmount = billAmount * ({{ event.tip_percentage or 15 }} / 100);
-            const totalNeeded = billAmount + tipAmount;
-            const coverage = totalNeeded > 0 ? (totalCommitted / totalNeeded) * 100 : 0;
+            // Add active class to clicked tab
+            event.target.classList.add('active');
             
-            document.getElementById('budgetCoverage').textContent = `${coverage.toFixed(0)}%`;
-            
-            // Update engagement level
-            const engagementEl = document.getElementById('engagementLevel');
-            if (coverage >= 80) {
-                engagementEl.textContent = 'Excellent';
-                engagementEl.className = 'commitment-level commitment-high';
-            } else if (coverage >= 50) {
-                engagementEl.textContent = 'Good';
-                engagementEl.className = 'commitment-level commitment-medium';
-            } else {
-                engagementEl.textContent = 'Building';
-                engagementEl.className = 'commitment-level commitment-low';
+            // Load content for specific tabs
+            if (tabName === 'activity') {
+                loadActivity();
+            } else if (tabName === 'media') {
+                loadMedia();
+            } else if (tabName === 'checkin') {
+                loadCheckIns();
+                loadGuestOptions();
             }
         }
         
-        // Add quick comment function
-        function addQuickComment() {
-            const commentText = document.getElementById('quickComment').value.trim();
-            if (!commentText) return;
-            
-            const author = document.getElementById('guestName').value || 'Anonymous';
-            
-            fetch(`/event/${eventId}/comment`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    author: author,
-                    text: commentText
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const feedDiv = document.getElementById('communityFeed');
-                    const feedItem = document.createElement('div');
-                    feedItem.className = 'feed-item comment';
-                    feedItem.innerHTML = `
-                        <div class="feed-header">
-                            <span class="feed-author">${data.comment.author}</span>
-                            <span class="feed-time">Just now</span>
-                        </div>
-                        <div>${data.comment.text}</div>
-                    `;
-                    feedDiv.insertBefore(feedItem, feedDiv.firstChild);
-                    document.getElementById('quickComment').value = '';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
+        // Budget slider
+        const budgetSlider = document.getElementById('budgetSlider');
+        const budgetDisplay = document.getElementById('budgetDisplay');
+        const budgetInput = document.getElementById('guestBudget');
         
-        // Allow Enter key for quick comments
-        document.getElementById('quickComment').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                addQuickComment();
-            }
+        budgetSlider.addEventListener('input', function() {
+            const value = parseInt(this.value);
+            budgetDisplay.textContent = value >= 100 ? '$100+' : `$${value}`;
+            budgetInput.value = value;
         });
         
-        function formatTime(timestamp) {
-            const date = new Date(timestamp);
-            return date.toLocaleString('en-US', {
-                month: 'short',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: '2-digit',
-                hour12: true
-            });
+        // Generate random avatar color
+        function getRandomColor() {
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F'];
+            return colors[Math.floor(Math.random() * colors.length)];
         }
         
-        function addComment() {
-            const commentText = document.getElementById('commentInput').value.trim();
-            if (!commentText) return;
-            
-            const author = document.getElementById('guestName').value || 'Anonymous';
-            
-            fetch(`/event/${eventId}/comment`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    author: author,
-                    text: commentText
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const commentsContainer = document.getElementById('commentsContainer');
-                    const commentDiv = document.createElement('div');
-                    commentDiv.className = 'comment';
-                    commentDiv.innerHTML = `
-                        <div class="comment-header">
-                            <div class="comment-author">${data.comment.author}</div>
-                            <div class="comment-time">${formatTime(data.comment.timestamp)}</div>
-                        </div>
-                        <div class="comment-text">${data.comment.text}</div>
-                    `;
-                    commentsContainer.appendChild(commentDiv);
-                    document.getElementById('commentInput').value = '';
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-        
-        document.getElementById('joinForm').addEventListener('submit', function(e) {
+        // Join event form
+        document.getElementById('joinForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = {
                 name: document.getElementById('guestName').value,
                 email: document.getElementById('guestEmail').value,
-                payment_method: document.getElementById('paymentMethod').value,
-                budget: parseFloat(document.getElementById('guestBudget').value) || 0,
-                is_birthday: document.getElementById('isBirthday').checked,
+                phone: document.getElementById('guestPhone').value,
                 message: document.getElementById('guestMessage').value,
-                dietary_restrictions: document.getElementById('dietaryRestrictions').value
+                dietary_restrictions: document.getElementById('dietaryRestrictions').value,
+                budget: parseFloat(document.getElementById('guestBudget').value),
+                payment_method: document.getElementById('paymentMethod').value,
+                is_birthday: document.getElementById('isBirthday').checked,
+                avatar_color: getRandomColor()
             };
             
             const messageDiv = document.getElementById('joinMessage');
             messageDiv.innerHTML = '<div class="success">Joining event... 🎉</div>';
             
-            fetch(`/event/${eventId}/join`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    messageDiv.innerHTML = '<div class="success">🎉 Successfully joined the event!</div>';
-                    location.reload(); // Refresh to show new guest
-                } else {
-                    messageDiv.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
+            try {
+                const response = await fetch(`/event/${eventId}/join`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.error || 'Something went wrong');
                 }
-            })
-            .catch(error => {
+                
+                messageDiv.innerHTML = '<div class="success">🎉 Successfully joined the event! Welcome to the community!</div>';
+                
+                // Reset form
+                document.getElementById('joinForm').reset();
+                budgetSlider.value = 25;
+                budgetDisplay.textContent = '$25';
+                budgetInput.value = 25;
+                
+                // Refresh guest list and stats
+                loadGuestList();
+                updateStats();
+                
+            } catch (error) {
                 messageDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
-            });
+            }
         });
         
-        document.getElementById('billForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Add comment
+        async function addComment() {
+            const commentInput = document.getElementById('commentInput');
+            const text = commentInput.value.trim();
             
-            const formData = {
-                bill_amount: parseFloat(document.getElementById('billAmount').value),
-                tip_percentage: parseFloat(document.getElementById('tipPercentage').value)
-            };
+            if (!text) return;
             
-            const messageDiv = document.getElementById('billMessage');
-            messageDiv.innerHTML = '<div class="success">Updating bill... 💰</div>';
-            
-            fetch(`/event/${eventId}/update_bill`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    messageDiv.innerHTML = '<div class="success">💰 Bill updated successfully!</div>';
-                    setTimeout(() => {
-                        location.reload();
-                    }, 1000);
-                } else {
-                    messageDiv.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
+            try {
+                const response = await fetch(`/event/${eventId}/comment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        author: 'Anonymous', // In a real app, this would be the logged-in user
+                        author_color: getRandomColor(),
+                        text: text
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    commentInput.value = '';
+                    loadActivity();
                 }
-            })
-            .catch(error => {
-                messageDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
-            });
-        });
+                
+            } catch (error) {
+                console.error('Error adding comment:', error);
+            }
+        }
         
-        function calculateBill() {
-            const resultsDiv = document.getElementById('billResults');
-            resultsDiv.innerHTML = '<div class="loading">Calculating... 🧮</div>';
-            
-            fetch(`/event/${eventId}/calculate`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    resultsDiv.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
+        // Load activity feed
+        async function loadActivity() {
+            try {
+                const response = await fetch(`/api/events`);
+                const events = await response.json();
+                const event = events.find(e => e.id === eventId);
+                
+                if (!event) return;
+                
+                const activityFeed = document.getElementById('activityFeed');
+                const comments = event.comments || [];
+                
+                if (comments.length === 0) {
+                    activityFeed.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">No activity yet. Be the first to say something!</div>';
                     return;
                 }
                 
-                let html = `
-                    <div class="bill-summary">
-                        <div class="summary-item">
-                            <span>Original Bill:</span>
-                            <span>$${data.bill_amount.toFixed(2)}</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Tip (${data.tip_percentage}%):</span>
-                            <span>$${data.tip_amount.toFixed(2)}</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Total Amount:</span>
-                            <span>$${data.total_amount.toFixed(2)}</span>
-                        </div>
-                    </div>
-                    <h4 style="margin-top: 20px; margin-bottom: 15px;">Individual Breakdown:</h4>
-                `;
-                
-                data.breakdown.forEach(person => {
-                    html += `
-                        <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 10px;">
-                            <div style="font-weight: 600; margin-bottom: 5px;">${person.name}</div>
-                            ${person.is_birthday ? 
-                                `<div style="color: #FFD700; font-weight: 600;">🎂 Birthday! No payment required.</div>` :
-                                `<div>
-                                    <div>Bill: $${person.bill.toFixed(2)} | Tip: $${person.tip.toFixed(2)} | Total: $${person.total.toFixed(2)}</div>
-                                </div>`
-                            }
+                const activityHTML = comments.reverse().map(comment => {
+                    const timeAgo = getTimeAgo(comment.timestamp);
+                    const initials = comment.author.split(' ').map(n => n[0]).join('').toUpperCase();
+                    
+                    return `
+                        <div class="activity-item">
+                            <div class="activity-avatar" style="background: ${comment.author_color || '#667eea'}">
+                                ${initials}
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-text">${comment.text}</div>
+                                <div class="activity-time">${timeAgo}</div>
+                            </div>
                         </div>
                     `;
-                });
+                }).join('');
                 
-                resultsDiv.innerHTML = html;
-            })
-            .catch(error => {
-                resultsDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
-            });
+                activityFeed.innerHTML = activityHTML;
+                
+            } catch (error) {
+                console.error('Error loading activity:', error);
+            }
         }
         
-        // Initialize community stats
-        updateCommunityStats();
+        // Load media gallery
+        async function loadMedia() {
+            try {
+                const response = await fetch(`/api/events`);
+                const events = await response.json();
+                const event = events.find(e => e.id === eventId);
+                
+                if (!event) return;
+                
+                const mediaGallery = document.getElementById('mediaGallery');
+                const media = event.media_gallery || [];
+                
+                if (media.length === 0) {
+                    mediaGallery.innerHTML = '<div style="text-align: center; padding: 40px; color: #666;">No photos or videos yet.</div>';
+                    return;
+                }
+                
+                const mediaHTML = media.map(item => {
+                    const mediaElement = item.file_type === 'video' 
+                        ? `<video src="${item.url}" controls></video>`
+                        : `<img src="${item.url}" alt="${item.caption}">`;
+                    
+                    return `
+                        <div class="media-item">
+                            ${mediaElement}
+                            ${item.caption ? `<div class="media-caption">${item.caption}</div>` : ''}
+                        </div>
+                    `;
+                }).join('');
+                
+                mediaGallery.innerHTML = mediaHTML;
+                
+            } catch (error) {
+                console.error('Error loading media:', error);
+            }
+        }
         
-        // Allow Enter key to submit comment
+        // Upload media
+        async function uploadMedia() {
+            const fileInput = document.getElementById('mediaFile');
+            const captionInput = document.getElementById('mediaCaption');
+            const file = fileInput.files[0];
+            
+            if (!file) return;
+            
+            const formData = new FormData();
+            formData.append('media', file);
+            formData.append('uploader_name', 'Anonymous'); // In a real app, this would be the logged-in user
+            formData.append('uploader_color', getRandomColor());
+            formData.append('caption', captionInput.value);
+            
+            try {
+                const response = await fetch(`/event/${eventId}/upload_media`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    captionInput.value = '';
+                    fileInput.value = '';
+                    loadMedia();
+                    loadActivity();
+                } else {
+                    alert(`Error: ${data.error}`);
+                }
+                
+            } catch (error) {
+                console.error('Error uploading media:', error);
+                alert('Error uploading file');
+            }
+        }
+        
+        // Load guest list
+        async function loadGuestList() {
+            try {
+                const response = await fetch(`/api/events`);
+                const events = await response.json();
+                const event = events.find(e => e.id === eventId);
+                
+                if (!event) return;
+                
+                const guestList = document.getElementById('guestList');
+                const guests = event.guests || [];
+                
+                if (guests.length === 0) {
+                    guestList.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">No guests yet</div>';
+                    return;
+                }
+                
+                const guestsHTML = guests.map(guest => {
+                    const initials = guest.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                    const commitmentClass = `commitment-${guest.commitment_level}`;
+                    
+                    return `
+                        <div class="guest-item">
+                            <div class="guest-avatar" style="background: ${guest.avatar_color || '#667eea'}">
+                                ${initials}
+                            </div>
+                            <div class="guest-info">
+                                <div class="guest-name">${guest.name}</div>
+                                <div class="guest-details">
+                                    $${guest.budget.toFixed(0)} committed • ${guest.payment_method}
+                                    ${guest.dietary_restrictions ? ` • ${guest.dietary_restrictions}` : ''}
+                                </div>
+                            </div>
+                            <div class="commitment-badge ${commitmentClass}">
+                                ${guest.commitment_level.toUpperCase()}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                guestList.innerHTML = guestsHTML;
+                
+            } catch (error) {
+                console.error('Error loading guest list:', error);
+            }
+        }
+        
+        // Load guest options for check-in
+        async function loadGuestOptions() {
+            try {
+                const response = await fetch(`/api/events`);
+                const events = await response.json();
+                const event = events.find(e => e.id === eventId);
+                
+                if (!event) return;
+                
+                const checkInGuest = document.getElementById('checkInGuest');
+                const guests = event.guests || [];
+                
+                checkInGuest.innerHTML = '<option value="">Select your name...</option>';
+                
+                guests.forEach(guest => {
+                    if (!guest.checked_in) {
+                        checkInGuest.innerHTML += `<option value="${guest.name}">${guest.name}</option>`;
+                    }
+                });
+                
+            } catch (error) {
+                console.error('Error loading guest options:', error);
+            }
+        }
+        
+        // Check in guest
+        async function checkInGuest() {
+            const guestName = document.getElementById('checkInGuest').value;
+            
+            if (!guestName) {
+                alert('Please select your name');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/event/${eventId}/check_in`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        guest_name: guestName
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    alert('✅ Successfully checked in!');
+                    loadGuestOptions();
+                    loadCheckIns();
+                    loadActivity();
+                } else {
+                    alert(`Error: ${data.error}`);
+                }
+                
+            } catch (error) {
+                console.error('Error checking in:', error);
+                alert('Error checking in');
+            }
+        }
+        
+        // Load check-ins
+        async function loadCheckIns() {
+            try {
+                const response = await fetch(`/api/events`);
+                const events = await response.json();
+                const event = events.find(e => e.id === eventId);
+                
+                if (!event) return;
+                
+                const checkedInGuests = document.getElementById('checkedInGuests');
+                const checkIns = event.check_ins || [];
+                
+                if (checkIns.length === 0) {
+                    checkedInGuests.innerHTML = '<div style="text-align: center; padding: 20px; color: #666;">No one has checked in yet</div>';
+                    return;
+                }
+                
+                const checkInsHTML = checkIns.map(checkIn => {
+                    const timeAgo = getTimeAgo(checkIn.timestamp);
+                    const initials = checkIn.guest_name.split(' ').map(n => n[0]).join('').toUpperCase();
+                    
+                    return `
+                        <div class="guest-item">
+                            <div class="guest-avatar" style="background: ${checkIn.guest_color || '#28a745'}">
+                                ${initials}
+                            </div>
+                            <div class="guest-info">
+                                <div class="guest-name">${checkIn.guest_name}</div>
+                                <div class="guest-details">Checked in ${timeAgo}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                checkedInGuests.innerHTML = checkInsHTML;
+                
+            } catch (error) {
+                console.error('Error loading check-ins:', error);
+            }
+        }
+        
+        // Update stats
+        async function updateStats() {
+            try {
+                const response = await fetch(`/api/events`);
+                const events = await response.json();
+                const event = events.find(e => e.id === eventId);
+                
+                if (!event) return;
+                
+                const guests = event.guests || [];
+                const totalCommitted = guests.reduce((sum, g) => sum + (g.budget || 0), 0);
+                const avgCommitment = guests.length > 0 ? totalCommitted / guests.length : 0;
+                
+                document.getElementById('guestCount').textContent = guests.length;
+                document.getElementById('totalCommitted').textContent = `$${totalCommitted.toFixed(0)}`;
+                document.getElementById('checkedInCount').textContent = event.check_ins ? event.check_ins.length : 0;
+                document.getElementById('mediaCount').textContent = event.media_gallery ? event.media_gallery.length : 0;
+                
+                // Calculate engagement level
+                const engagementLevel = document.getElementById('engagementLevel');
+                let level = 'Building';
+                let color = '#ffa500';
+                
+                if (guests.length >= 5 && avgCommitment >= 25) {
+                    level = 'Excellent';
+                    color = '#28a745';
+                } else if (guests.length >= 3 && avgCommitment >= 15) {
+                    level = 'Good';
+                    color = '#17a2b8';
+                }
+                
+                engagementLevel.textContent = level;
+                engagementLevel.style.background = color;
+                engagementLevel.style.color = 'white';
+                
+            } catch (error) {
+                console.error('Error updating stats:', error);
+            }
+        }
+        
+        // Utility function to get time ago
+        function getTimeAgo(timestamp) {
+            const now = new Date();
+            const time = new Date(timestamp);
+            const diffInSeconds = Math.floor((now - time) / 1000);
+            
+            if (diffInSeconds < 60) return 'just now';
+            if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
+            if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
+            return `${Math.floor(diffInSeconds / 86400)}d ago`;
+        }
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGuestList();
+            updateStats();
+            
+            // Auto-refresh every 30 seconds
+            setInterval(() => {
+                loadGuestList();
+                updateStats();
+                if (document.getElementById('activity').classList.contains('active')) {
+                    loadActivity();
+                }
+            }, 30000);
+        });
+        
+        // Allow Enter key to submit comments
         document.getElementById('commentInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
+            if (e.key === 'Enter') {
                 addComment();
             }
         });
-        
-        // Handle party fund contributions
-        document.getElementById('contributeForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = {
-                contributor_name: document.getElementById('contributorName').value,
-                amount: parseFloat(document.getElementById('contributionAmount').value),
-                payment_method: document.getElementById('paymentMethod').value,
-                message: document.getElementById('contributionMessage').value,
-                is_anonymous: document.getElementById('isAnonymous').checked
-            };
-            
-            const messageDiv = document.getElementById('contributeMessage');
-            messageDiv.innerHTML = '<div class="success">Processing payment... 💳</div>';
-            
-            fetch(`/event/${eventId}/process_payment`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    if (data.contribution.payment_method === 'zelle') {
-                        messageDiv.innerHTML = `
-                            <div class="success">
-                                🏦 Zelle payment initiated! 
-                                <div style="margin-top: 10px; padding: 10px; background: #e8f5e8; border-radius: 8px;">
-                                    <strong>Instructions:</strong> ${data.contribution.payment_instructions}
-                                </div>
-                                
-                                <div style="margin-top: 15px;">
-                                    <h4 style="margin-bottom: 10px;">📱 Mobile Banking Apps:</h4>
-                                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                                        <a href="${data.contribution.mobile_links.chase}" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">🏦 Chase</a>
-                                        <a href="${data.contribution.mobile_links.bankofamerica}" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">🏦 Bank of America</a>
-                                        <a href="${data.contribution.mobile_links.wellsfargo}" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">🏦 Wells Fargo</a>
-                                        <a href="${data.contribution.mobile_links.citibank}" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">🏦 Citi</a>
-                                    </div>
-                                </div>
-                                
-                                <div style="margin-top: 15px;">
-                                    <button onclick="showQRCode('${data.contribution.qr_code_url}')" class="btn-secondary" style="padding: 8px 12px; font-size: 0.9em;">
-                                        📱 Show QR Code
-                                    </button>
-                                </div>
-                                
-                                <a href="${data.payment_link}" style="color: #155724; text-decoration: underline; font-weight: 600; margin-top: 10px; display: inline-block;">
-                                    📧 Send email to organizer
-                                </a>
-                            </div>
-                        `;
-                    } else {
-                        messageDiv.innerHTML = `
-                            <div class="success">
-                                💳 Payment processed! 
-                                <a href="${data.payment_link}" target="_blank" style="color: #155724; text-decoration: underline; font-weight: 600;">
-                                    Click here to complete payment
-                                </a>
-                            </div>
-                        `;
-                    }
-                    setTimeout(() => {
-                        location.reload();
-                    }, 5000);
-                } else {
-                    messageDiv.innerHTML = `<div class="error">❌ Error: ${data.error}</div>`;
-                }
-            })
-            .catch(error => {
-                messageDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
-            });
-        });
-        
-        // Show QR Code for Zelle payments
-        function showQRCode(qrCodeUrl) {
-            fetch(qrCodeUrl)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.qr_code) {
-                        const modal = document.createElement('div');
-                        modal.style.cssText = `
-                            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                            background: rgba(0,0,0,0.8); display: flex; align-items: center;
-                            justify-content: center; z-index: 1000;
-                        `;
-                        modal.innerHTML = `
-                            <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; max-width: 400px;">
-                                <h3 style="margin-bottom: 20px;">🏦 Zelle QR Code</h3>
-                                <img src="${data.qr_code}" style="max-width: 300px; margin-bottom: 20px;">
-                                <p style="color: #666; margin-bottom: 20px;">Scan with your banking app to pay</p>
-                                <button onclick="this.parentElement.parentElement.remove()" class="btn-primary">
-                                    Close
-                                </button>
-                            </div>
-                        `;
-                        document.body.appendChild(modal);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error loading QR code:', error);
-                });
-        }
-        
-        // Verify payment (organizer only)
-        function verifyPayment(contributionId) {
-            const verificationCode = prompt('Enter 2FA verification code:');
-            if (!verificationCode) return;
-            
-            fetch(`/event/${eventId}/verify_payment/${contributionId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    verification_code: verificationCode,
-                    verifier_name: 'Organizer'
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Payment verified successfully!');
-                    location.reload();
-                } else {
-                    alert(`Error: ${data.error}`);
-                }
-            })
-            .catch(error => {
-                alert(`Error: ${error.message}`);
-            });
-        }
-        
-        // Generate receipt
-        function generateReceipt(contributionId) {
-            fetch(`/event/${eventId}/receipt/${contributionId}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.receipt) {
-                        const receipt = data.receipt;
-                        const receiptText = `
-Payment Receipt
-===============
-Receipt ID: ${receipt.receipt_id}
-Event: ${receipt.event_title}
-Date: ${receipt.event_date}
-Contributor: ${receipt.contributor_name}
-Amount: $${receipt.amount.toFixed(2)}
-Payment Method: ${receipt.payment_method}
-Payment Date: ${receipt.payment_date}
-Verified: ${receipt.verified_date || 'Pending'}
-Message: ${receipt.message || 'None'}
-Organizer: ${receipt.organizer}
-                        `;
-                        
-                        const modal = document.createElement('div');
-                        modal.style.cssText = `
-                            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                            background: rgba(0,0,0,0.8); display: flex; align-items: center;
-                            justify-content: center; z-index: 1000;
-                        `;
-                        modal.innerHTML = `
-                            <div style="background: white; padding: 30px; border-radius: 15px; max-width: 500px; max-height: 80vh; overflow-y: auto;">
-                                <h3 style="margin-bottom: 20px;">📄 Payment Receipt</h3>
-                                <pre style="background: #f8f9fa; padding: 15px; border-radius: 8px; white-space: pre-wrap; font-family: monospace;">${receiptText}</pre>
-                                <button onclick="this.parentElement.parentElement.remove()" class="btn-primary" style="margin-top: 20px;">
-                                    Close
-                                </button>
-                            </div>
-                        `;
-                        document.body.appendChild(modal);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error generating receipt:', error);
-                });
-        }
-        
-        // Set payment milestone
-        function setMilestone() {
-            const targetAmount = prompt('Enter target amount for milestone:');
-            if (!targetAmount) return;
-            
-            const description = prompt('Enter milestone description:');
-            if (!description) return;
-            
-            fetch(`/event/${eventId}/milestone`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    target_amount: parseFloat(targetAmount),
-                    description: description
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Milestone set successfully!');
-                    location.reload();
-                } else {
-                    alert(`Error: ${data.error}`);
-                }
-            })
-            .catch(error => {
-                alert(`Error: ${error.message}`);
-            });
-        }
-        
-        // Show 2FA code for organizer
-        function show2FACode() {
-            // In a real app, this would be generated server-side
-            // For demo purposes, we'll use a simple hash
-            const code = btoa(eventId).substring(0, 6).toUpperCase();
-            
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-                background: rgba(0,0,0,0.8); display: flex; align-items: center;
-                justify-content: center; z-index: 1000;
-            `;
-            modal.innerHTML = `
-                <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; max-width: 400px;">
-                    <h3 style="margin-bottom: 20px;">🔐 Two-Factor Authentication</h3>
-                    <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-                        <div style="font-size: 2em; font-weight: bold; color: #007bff; letter-spacing: 5px;">${code}</div>
-                        <p style="color: #666; margin-top: 10px;">Use this code to verify payments</p>
-                    </div>
-                    <button onclick="this.parentElement.parentElement.remove()" class="btn-primary">
-                        Close
-                    </button>
-                </div>
-            `;
-            document.body.appendChild(modal);
-        }
     </script>
-<script>
-    document.getElementById('showSplitBtn').onclick = function() {
-        // Get the event ID from the URL
-        const eventId = window.location.pathname.split('/').pop();
-        fetch(`/event/${eventId}/calculate`, {
-            method: 'POST'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                document.getElementById('billSplitResults').innerHTML = '<b>Error:</b> ' + data.error;
-                return;
-            }
-            let html = `<div style="background: #f8f9fa; padding: 20px; border-radius: 15px; margin-top: 20px;">
-                        <h4 style="margin-bottom: 15px;">💰 Bill Split Results</h4>
-                        <div style="margin-bottom: 10px;"><b>Bill:</b> $${data.bill_amount.toFixed(2)}</div>
-                        <div style="margin-bottom: 10px;"><b>Tip (${data.tip_percentage}%):</b> $${data.tip_amount.toFixed(2)}</div>
-                        <div style="margin-bottom: 15px;"><b>Total:</b> $${data.total_amount.toFixed(2)}</div>
-                        <div style="margin-bottom: 10px;"><b>Breakdown:</b></div>
-                        <ul style="list-style: none; padding: 0;">`;
-            data.breakdown.forEach(person => {
-                html += `<li style="padding: 8px 0; border-bottom: 1px solid #eee;">
-                            <strong>${person.name}:</strong> 
-                            ${person.is_birthday ? '🎂 Birthday! No payment.' : `$${person.bill.toFixed(2)} bill + $${person.tip.toFixed(2)} tip = <span style="color: #28a745; font-weight: bold;">$${person.total.toFixed(2)}</span>`}
-                        </li>`;
-            });
-            html += '</ul></div>';
-            document.getElementById('billSplitResults').innerHTML = html;
-        })
-        .catch(error => {
-            document.getElementById('billSplitResults').innerHTML = '<div style="color: red; padding: 10px;">Error: ' + error.message + '</div>';
-        });
-    };
-    </script>
-    </body>
-</html> 
+</body>
+</html>
